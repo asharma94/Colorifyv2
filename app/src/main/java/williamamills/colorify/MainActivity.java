@@ -3,88 +3,84 @@ package williamamills.colorify;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.Toast;
+import android.widget.EditText;
+import android.widget.Spinner;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
-import org.opencv.core.CvType;
-import org.opencv.core.Mat;
-import org.opencv.imgproc.Imgproc;
-
 public class MainActivity extends Activity {
     Button mainButton;
     JSONArray j;
-
-    static {
-        System.loadLibrary("opencv_java3");
-    }
-
+    MainActivity activity = this;
+    Spinner choiceSpinner;
+    EditText editText;
+    Spinner colorSpinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mainButton = (Button) findViewById(R.id.main_enter);
-        final JSONArray jArrayFacebookData = new JSONArray();
-        final JSONObject jObjectType = new JSONObject();
-        try {
-            // put elements into the object as a key-value pair
-            jObjectType.put("type", "instagram_json");
+        choiceSpinner = (Spinner) findViewById(R.id.main_activity_choice_spinner);
+        colorSpinner = (Spinner) findViewById(R.id.main_activity_color_spinner);
+        editText = (EditText) findViewById(R.id.main_activity_edit_text);
 
-            jArrayFacebookData.put(jObjectType);
+        choiceSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                switch (position) {
+                    case 0://popular
+                        editText.setVisibility(View.INVISIBLE);
+                        colorSpinner.setVisibility(View.INVISIBLE);
+                        break;
+                    case 1://location
+                        editText.setVisibility(View.VISIBLE);
+                        colorSpinner.setVisibility(View.INVISIBLE);
+                        break;
+                    case 2://color
+                        editText.setVisibility(View.INVISIBLE);
+                        colorSpinner.setVisibility(View.VISIBLE);
+                        break;
+                }
+            }
+            @Override
+            public void onNothingSelected(AdapterView adapterView){
 
-            // 2nd array for user information
-            JSONObject jObjectData = new JSONObject();
-
-            // Create Json Object using Facebook Data
-            jObjectData.put("facebook_user_id", "id");
-            jObjectData.put("first_name", "Alexander");
-            jObjectData.put("last_name", "Mills");
-            jObjectData.put("email", "wamills1@gmail.com");
-            jObjectData.put("username", "wamills");
-            jObjectData.put("birthday", "january");
-            jObjectData.put("gender", "Male");
-            jObjectData.put("location", "Austin");
-            jObjectData.put("display_photo", "a");
-            jArrayFacebookData.put(jObjectData);
-        }catch(Exception e){
-
-        }
-        mainButton.setText("ImageListView Test");
+            }
+        });
+        mainButton.setText("Search");
         mainButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               OpenCVHelper opencv = new OpenCVHelper(getApplicationContext());
-                opencv.execute();
-            }
-        });
-        Button button3 = (Button) findViewById(R.id.button3);
-        final ImageView imageView = (ImageView) findViewById(R.id.image_view);
-        button3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try{
-                imageView.setImageBitmap(BitmapFactory.decodeStream(openFileInput("test2.png")));
-                }catch(FileNotFoundException e){
-                    Toast.makeText(getApplicationContext(), "Fuck", Toast.LENGTH_LONG).show();
+                Integer pos = choiceSpinner.getSelectedItemPosition();
+                switch (pos) {
+                    case 0://popular
+                        InstagramAPIHelper popularHelper = new InstagramAPIHelper(activity, getApplicationContext());
+                        popularHelper.execute();
+                        break;
+                    case 1:
+                        if(editText.getText().toString().matches("")){break;}
+                        InstagramLocationAPIHelper locationHelper = new InstagramLocationAPIHelper(activity, getApplicationContext(), editText.getText().toString().trim());
+                        locationHelper.execute();
+                        break;
+                    case 2:
+                        popularHelper = new InstagramAPIHelper(activity, getApplicationContext());
+                        popularHelper.execute();
+                        break;
                 }
             }
         });
@@ -130,4 +126,26 @@ public class MainActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onBackPressed(){
+
+    }
+    /*
+  Integer pos = choiceSpinner.getSelectedItemPosition();
+                switch (pos) {
+                    case 0://popular
+                        InstagramAPIHelper popularHelper = new InstagramAPIHelper(activity, getApplicationContext());
+                        popularHelper.execute();
+                        break;
+                    case 1:
+                        if(editText.getText().toString().matches("")){break;}
+                        InstagramLocationAPIHelper locationHelper = new InstagramLocationAPIHelper(activity, getApplicationContext(), editText.getText().toString().trim());
+                        locationHelper.execute();
+                        break;
+                    case 2:
+                        popularHelper = new InstagramAPIHelper(activity, getApplicationContext());
+                        popularHelper.execute();
+                        break;
+                }
+     */
 }

@@ -2,53 +2,53 @@
 <items version="2" >
 
     <item
-        jar="C:\Users\Ankit\.gradle\caches\modules-2\files-2.1\com.fasterxml.jackson.core\jackson-annotations\2.2.2\285cb9c666f0f0f3dd8a1be04e1f457eb7b15113\jackson-annotations-2.2.2.jar"
+        jar="C:\Users\Alexander\.gradle\caches\modules-2\files-2.1\com.fasterxml.jackson.core\jackson-annotations\2.2.2\285cb9c666f0f0f3dd8a1be04e1f457eb7b15113\jackson-annotations-2.2.2.jar"
         jumboMode="false"
         revision="23.0.1"
         sha1="285cb9c666f0f0f3dd8a1be04e1f457eb7b15113">
-        <dex dex="C:\Users\Ankit\Desktop\Junior\Semester2\EE 461L\Colorify\app\build\intermediates\pre-dexed\debug\jackson-annotations-2.2.2-8ea4b4c7d0669c8c5aa2078aa37b0965ecba58b3.jar" />
+        <dex dex="C:\Users\Alexander\Desktop\Colorifyv2\app\build\intermediates\pre-dexed\debug\jackson-annotations-2.2.2-90bdf8307a4b6af88e43859d674620dc77aa3f5d.jar" />
     </item>
     <item
-        jar="C:\Users\Ankit\.gradle\caches\modules-2\files-2.1\com.fasterxml.jackson.core\jackson-core\2.2.2\d20be6a5ddd6f8cfd36ebf6dea329873a1c41f1b\jackson-core-2.2.2.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="d20be6a5ddd6f8cfd36ebf6dea329873a1c41f1b">
-        <dex dex="C:\Users\Ankit\Desktop\Junior\Semester2\EE 461L\Colorify\app\build\intermediates\pre-dexed\debug\jackson-core-2.2.2-9961d7882958c43b0ff91e65efa5501db957ca2f.jar" />
-    </item>
-    <item
-        jar="C:\Users\Ankit\Desktop\Junior\Semester2\EE 461L\Colorify\app\build\intermediates\exploded-aar\Colorify\opencv-java\unspecified\jars\classes.jar"
-        jumboMode="false"
-        revision="23.0.1"
-        sha1="4d995b39a006d540ab3b7db2909a2c55fae9943a">
-        <dex dex="C:\Users\Ankit\Desktop\Junior\Semester2\EE 461L\Colorify\app\build\intermediates\pre-dexed\debug\classes-b671516ec3b74a284f799066b3e011fe863ef716.jar" />
-    </item>
-    <item
-        jar="C:\Users\Ankit\.gradle\caches\modules-2\files-2.1\com.fasterxml.jackson.core\jackson-databind\2.2.2\3c8f6018eaa72d43b261181e801e6f8676c16ef6\jackson-databind-2.2.2.jar"
+        jar="C:\Users\Alexander\.gradle\caches\modules-2\files-2.1\com.fasterxml.jackson.core\jackson-databind\2.2.2\3c8f6018eaa72d43b261181e801e6f8676c16ef6\jackson-databind-2.2.2.jar"
         jumboMode="false"
         revision="23.0.1"
         sha1="3c8f6018eaa72d43b261181e801e6f8676c16ef6">
-        <dex dex="C:\Users\Ankit\Desktop\Junior\Semester2\EE 461L\Colorify\app\build\intermediates\pre-dexed\debug\jackson-databind-2.2.2-ac56178200124dc598c7a34596a5c925508ad044.jar" />
+        <dex dex="C:\Users\Alexander\Desktop\Colorifyv2\app\build\intermediates\pre-dexed\debug\jackson-databind-2.2.2-9fdef93664580a558d883b720c8948e90129ad1c.jar" />
     </item>
     <item
-        jar="C:\Users\Ankit\.gradle\caches\modules-2\files-2.1\com.firebase\firebase-client-jvm\2.5.0\c0af904657634f7ab9cc21e75d80250570033321\firebase-client-jvm-2.5.0.jar"
+        jar="C:\Users\Alexander\.gradle\caches\modules-2\files-2.1\com.fasterxml.jackson.core\jackson-core\2.2.2\d20be6a5ddd6f8cfd36ebf6dea329873a1c41f1b\jackson-core-2.2.2.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="d20be6a5ddd6f8cfd36ebf6dea329873a1c41f1b">
+        <dex dex="C:\Users\Alexander\Desktop\Colorifyv2\app\build\intermediates\pre-dexed\debug\jackson-core-2.2.2-bcd84d5dc5e9c1efc169aef697edbc7f40ed5d10.jar" />
+    </item>
+    <item
+        jar="C:\Users\Alexander\.gradle\caches\modules-2\files-2.1\com.firebase\firebase-client-jvm\2.5.0\c0af904657634f7ab9cc21e75d80250570033321\firebase-client-jvm-2.5.0.jar"
         jumboMode="false"
         revision="23.0.1"
         sha1="c0af904657634f7ab9cc21e75d80250570033321">
-        <dex dex="C:\Users\Ankit\Desktop\Junior\Semester2\EE 461L\Colorify\app\build\intermediates\pre-dexed\debug\firebase-client-jvm-2.5.0-8d1fb4752268db21ec689e775ad06d069529fe1e.jar" />
+        <dex dex="C:\Users\Alexander\Desktop\Colorifyv2\app\build\intermediates\pre-dexed\debug\firebase-client-jvm-2.5.0-6ddf8da456cd06d731dc1433472acdcd8d9797ec.jar" />
     </item>
     <item
-        jar="C:\Users\Ankit\.gradle\caches\modules-2\files-2.1\com.firebase\firebase-client-android\2.5.0\7d0473896b3b10b23a2f9812fec4316dff8afdd\firebase-client-android-2.5.0.jar"
+        jar="C:\Users\Alexander\.gradle\caches\modules-2\files-2.1\com.firebase\firebase-client-android\2.5.0\7d0473896b3b10b23a2f9812fec4316dff8afdd\firebase-client-android-2.5.0.jar"
         jumboMode="false"
         revision="23.0.1"
         sha1="07d0473896b3b10b23a2f9812fec4316dff8afdd">
-        <dex dex="C:\Users\Ankit\Desktop\Junior\Semester2\EE 461L\Colorify\app\build\intermediates\pre-dexed\debug\firebase-client-android-2.5.0-abd1bf028f3ec2678ffbb24fa66cf4fb72664d76.jar" />
+        <dex dex="C:\Users\Alexander\Desktop\Colorifyv2\app\build\intermediates\pre-dexed\debug\firebase-client-android-2.5.0-f5144160c8babecc5b4a381f8b508f3bb1aecf28.jar" />
     </item>
     <item
-        jar="C:\Users\Ankit\.gradle\caches\modules-2\files-2.1\com.firebase\tubesock\0.0.12\6ec0bbd3e161a73ed672284b587fd32309a86d7a\tubesock-0.0.12.jar"
+        jar="C:\Users\Alexander\.gradle\caches\modules-2\files-2.1\com.firebase\tubesock\0.0.12\6ec0bbd3e161a73ed672284b587fd32309a86d7a\tubesock-0.0.12.jar"
         jumboMode="false"
         revision="23.0.1"
         sha1="6ec0bbd3e161a73ed672284b587fd32309a86d7a">
-        <dex dex="C:\Users\Ankit\Desktop\Junior\Semester2\EE 461L\Colorify\app\build\intermediates\pre-dexed\debug\tubesock-0.0.12-b4b192a9c219be63365c6b88b8b511a7c0fee312.jar" />
+        <dex dex="C:\Users\Alexander\Desktop\Colorifyv2\app\build\intermediates\pre-dexed\debug\tubesock-0.0.12-779ecc554430776811c08f2f4835691f24d10f72.jar" />
+    </item>
+    <item
+        jar="C:\Users\Alexander\Desktop\Colorifyv2\app\build\intermediates\exploded-aar\Colorifyv2\opencv-java\unspecified\jars\classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="1c9d3a9d122f499f56277665081be4f0e76fed3a">
+        <dex dex="C:\Users\Alexander\Desktop\Colorifyv2\app\build\intermediates\pre-dexed\debug\classes-2c3dfed433c65a9d77cab528f427b44df7a58285.jar" />
     </item>
 
 </items>

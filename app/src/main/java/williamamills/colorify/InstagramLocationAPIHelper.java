@@ -1,7 +1,7 @@
 package williamamills.colorify;
 
 /**
- * Created by Nishant on 4/9/16.
+ * Created by Alexander on 4/18/2016.
  */
 
 import android.content.Context;
@@ -22,7 +22,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-public class InstagramAPIHelper extends AsyncTask<Void, Void, String> {
+public class InstagramLocationAPIHelper extends AsyncTask<Void, Void, String> {
 
     /* Popular Endpoint*/
     String API_URL = "https://api.instagram.com/v1/media/popular?client_id=e05c462ebd86446ea48a5af73769b602";
@@ -48,17 +48,34 @@ public class InstagramAPIHelper extends AsyncTask<Void, Void, String> {
             longitude = lon;
         }
     }
-    public InstagramAPIHelper(MainActivity act, Context context){
+    public InstagramLocationAPIHelper(MainActivity act, Context context, String location){
         activity = act;
         ctx = context;
+        if(Geocoder.isPresent()){
+            try {
+                //String location = "barcelona spain";
+                Geocoder gc = new Geocoder(ctx);
+                List<Address> addresses= gc.getFromLocationName(location, 5); // get the found Address Objects
+
+                List<LatLng> ll = new ArrayList<>(addresses.size()); // A list to save the coordinates if they are available
+                for(Address a : addresses){
+                    if(a.hasLatitude() && a.hasLongitude()){
+                        ll.add(new LatLng(a.getLatitude(), a.getLongitude()));
+                    }
+                }
+                locationLat = ll.get(0);
+            } catch (IOException e) {
+                // handle the exception
+                int i = 3;
+            }
+        }
     }
+
 
     protected String doInBackground(Void... urls) {
 
         try {
-            URL url = new URL(API_URL);
-            //locationLat.longitude*=-1;
-            //URL url = new URL("https://api.instagram.com/v1/locations/search?lat=" + locationLat.latitude + "&lng="+ locationLat.longitude+ "&client_id=e05c462ebd86446ea48a5af73769b602");
+            URL url = new URL("https://api.instagram.com/v1/locations/search?lat=" + locationLat.latitude + "&lng="+ locationLat.longitude+ "&client_id=e05c462ebd86446ea48a5af73769b602");
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
             try {
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
@@ -68,7 +85,26 @@ public class InstagramAPIHelper extends AsyncTask<Void, Void, String> {
                     stringBuilder.append(line).append("\n");
                 }
                 bufferedReader.close();
-                return stringBuilder.toString();
+                String response = stringBuilder.toString();
+                JSONObject json = new JSONObject(response); //contains meta and data
+                JSONArray data = json.getJSONArray("data");
+                JSONObject j = data.getJSONObject(0);
+                String a = j.getString("id");
+
+                URL url2 = new URL("https://api.instagram.com/v1/locations/"+ a +"/media/recent?client_id=e05c462ebd86446ea48a5af73769b602");
+                HttpURLConnection urlConnection2 = (HttpURLConnection) url2.openConnection();
+                try {
+                    BufferedReader bufferedReader2 = new BufferedReader(new InputStreamReader(urlConnection2.getInputStream()));
+                    StringBuilder stringBuilder2 = new StringBuilder();
+                    String line2;
+                    while ((line2 = bufferedReader2.readLine()) != null) {
+                        stringBuilder2.append(line2).append("\n");
+                    }
+                    bufferedReader2.close();
+                    return stringBuilder2.toString();
+                }finally{
+                    urlConnection2.disconnect();
+                }
             }
             finally{
                 urlConnection.disconnect();
@@ -142,4 +178,5 @@ public class InstagramAPIHelper extends AsyncTask<Void, Void, String> {
     }
 
 }
+
 

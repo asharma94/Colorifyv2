@@ -54,7 +54,7 @@ public class GetBitmap extends AsyncTask<String, Void, ArrayList<Bitmap>> {
                 InputStream input = connection.getInputStream();
                 Bitmap myBitmap = BitmapFactory.decodeStream(input); //// FIXME: 4/13/2016
                 arrayList.add(myBitmap);
-                myBitmap.recycle();
+                //myBitmap.recycle();
                 success = true;
             }
             return arrayList;
@@ -78,7 +78,7 @@ public class GetBitmap extends AsyncTask<String, Void, ArrayList<Bitmap>> {
         else {
             Intent i = new Intent(ctx, ItemsList.class);
             for(int k = 0; k < response.size(); k++) {
-               createImageFromBitmap(response.get(k), k);
+                createImageFromBitmap(response.get(k), k);
             }
             Bundle extras = new Bundle();
             //extras.putInt("uris", response.size());
