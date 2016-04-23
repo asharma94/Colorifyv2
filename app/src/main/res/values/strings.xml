@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">Colorify</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="user_name">User Name</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="title_activity_image_view">ImageViewActivity</string>
+    <string name="title_activity_items_list">ItemsList</string>
+    <string name="firebase_url">https://colorify.firebaseIO.com</string>
+    <string name="content_description">Image from Instagram</string>
+    <string name="spinner_title">Search Choice</string>
+
+    <string-array name="spinner_choices">
+        <item>Popular</item>
+        <item>Location</item>
+        <item>Color</item>
+    </string-array>
+</resources>
