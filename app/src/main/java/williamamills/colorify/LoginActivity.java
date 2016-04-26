@@ -3,14 +3,18 @@ package williamamills.colorify;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Editable;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,6 +29,7 @@ public class LoginActivity extends Activity {
     EditText userNameEditText;
     EditText passwordEditText;
     Button loginButton;
+    Button newUserButton;
     private static final String TAG = LoginActivity.class.getSimpleName();
 
     /* TextView that is used to display information about the logged in user */
@@ -73,6 +78,13 @@ public class LoginActivity extends Activity {
                     }
                 });*/
 
+            }
+        });
+        newUserButton = (Button) findViewById(R.id.create_user_button);
+        newUserButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                createUser();
             }
         });
         /* Create the Firebase ref that is used for all authentication with Firebase */
@@ -191,6 +203,57 @@ public class LoginActivity extends Activity {
     public void loginWithPassword(String username, String password) {
         mAuthProgressDialog.show();
         mFirebaseRef.authWithPassword(username, password, new AuthResultHandler("password"));
+    }
+
+    public void createUser(){
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+        final EditText edittextUser = new EditText(getApplicationContext());
+        edittextUser.setHint("Email");
+        edittextUser.setHintTextColor(Color.parseColor("#000000"));
+        edittextUser.setTextColor(Color.parseColor("#000000"));
+        final EditText edittextPassword = new EditText(getApplicationContext());
+        edittextPassword.setHint("Password");
+        edittextPassword.setTextColor(Color.parseColor("#000000"));
+        edittextPassword.setHintTextColor(Color.parseColor("#000000"));
+        alert.setMessage("Create Username and Password");
+        alert.setTitle("User Creation");
+        LinearLayout layout = new LinearLayout(getApplicationContext());
+        layout.setOrientation(LinearLayout.VERTICAL);
+
+        layout.addView(edittextUser);
+        layout.addView(edittextPassword);
+
+        alert.setView(layout);
+
+        alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                //What ever you want to do with the value
+                //Editable YouEditTextValue = edittext.getText();
+                //OR
+                String user = edittextUser.getText().toString().trim();
+                String pass = edittextPassword.getText().toString();
+                mFirebaseRef.createUser(user, pass, new Firebase.ResultHandler() {
+                    @Override
+                    public void onSuccess() {
+                        Intent i = new Intent(getApplicationContext(), MainActivity.class);
+                        startActivity(i);
+                    }
+
+                    @Override
+                    public void onError(FirebaseError firebaseError) {
+                        Toast.makeText(getApplicationContext(), "Error creating user", Toast.LENGTH_LONG).show();
+                    }
+                });
+            }
+        });
+
+        alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                // what ever you want to do with No option.
+            }
+        });
+
+        alert.show();
     }
 
 }

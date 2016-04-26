@@ -31,8 +31,10 @@
         android:layout_below="@+id/main_enter"
         android:src="@drawable/colorwheel"/>
     <EditText
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/main_activity_choice_spinner"
+        android:layout_alignEnd="@+id/main_activity_choice_spinner"
         android:hint="Search"
         android:id="@+id/main_activity_edit_text"
         android:layout_below="@+id/main_activity_choice_spinner"/>

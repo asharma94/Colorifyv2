@@ -30,53 +30,71 @@ import static org.hamcrest.Matchers.instanceOf;
 import static org.hamcrest.Matchers.is;
 
 @RunWith(AndroidJUnit4.class)
-public class MainActivityTest {
+public class SystemTest {
 
 
 
 
-        private String mStringToBetyped;
+    private String userStringToBetyped;
+    private String passwordStringToBetyped;
+    private String locationStringToBetyped;
 
-        @Rule
-        public ActivityTestRule<MainActivity> mActivityRule = new ActivityTestRule<>(
-                MainActivity.class);
+    @Rule
+    public ActivityTestRule<LoginActivity> mActivityRule = new ActivityTestRule<>(
+            LoginActivity.class);
 
-        @Before
-        public void initValidString() {
-            // Specify a valid string.
-            mStringToBetyped = "barcelona";
-            Intents.init();
-        }
+    @Before
+    public void initValidString() {
+        // Specify a valid string.
+        userStringToBetyped = "wamills1@gmail.com";
+        passwordStringToBetyped = "hello";
+        locationStringToBetyped = "barcelona";
+        Intents.init();
+    }
     @After
     public void end(){
         Intents.release();
     }
 
-        @Test
-        public void searchByPopular() {
-
-            // Type text and then press the button.
-            //onView(withId(R.id.main_activity_edit_text))
-              //      .perform(typeText(mStringToBetyped), closeSoftKeyboard());
-            onView(withId(R.id.main_enter)).perform(click());
-            // Check that the text was changed.
-            intended(hasComponent(ItemsList.class.getName()));
-            //onView(withId(R.id.main_activity_edit_text))
-             //       .check(matches(withText(mStringToBetyped)));
-        }
+    @Test
+    public void searchByPopular() {
+        onView(withId(R.id.login_user_name))
+                .perform(typeText(userStringToBetyped), closeSoftKeyboard());
+        onView(withId(R.id.login_password))
+                .perform(typeText(passwordStringToBetyped), closeSoftKeyboard());
+        onView(withId(R.id.login_button)).perform(click());
+        intended(hasComponent(MainActivity.class.getName()));
+        onView(withId(R.id.main_enter)).perform(click());
+        // Check that the text was changed.
+        intended(hasComponent(ItemsList.class.getName()));
+        //onView(withId(R.id.main_activity_edit_text))
+        //       .check(matches(withText(mStringToBetyped)));
+    }
     @Test
     public void searchByLocation(){
+        onView(withId(R.id.login_user_name))
+                .perform(typeText(userStringToBetyped), closeSoftKeyboard());
+        onView(withId(R.id.login_password))
+                .perform(typeText(passwordStringToBetyped), closeSoftKeyboard());
+        onView(withId(R.id.login_button)).perform(click());
+        intended(hasComponent(MainActivity.class.getName()));
         onView(withId(R.id.main_activity_choice_spinner))
                 .perform(click());
         onData(allOf(is(instanceOf(String.class)), is("Location"))).perform(click());
         onView(withId(R.id.main_activity_edit_text))
-             .perform(typeText(mStringToBetyped), closeSoftKeyboard());
+                .perform(typeText(locationStringToBetyped), closeSoftKeyboard());
         onView(withId(R.id.main_enter)).perform(click());
         // Check that the text was changed.
         intended(hasComponent(ItemsList.class.getName()));
     }
     @Test
     public void searchByColor(){
+        onView(withId(R.id.login_user_name))
+                .perform(typeText(userStringToBetyped), closeSoftKeyboard());
+        onView(withId(R.id.login_password))
+                .perform(typeText(passwordStringToBetyped), closeSoftKeyboard());
+        onView(withId(R.id.login_button)).perform(click());
+        intended(hasComponent(MainActivity.class.getName()));
         onView(withId(R.id.main_activity_choice_spinner))
                 .perform(click());
         onData(allOf(is(instanceOf(String.class)), is("Color"))).perform(click());

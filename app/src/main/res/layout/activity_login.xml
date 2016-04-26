@@ -23,4 +23,11 @@
         android:id="@+id/login_button"
         android:text="@string/login"
         android:layout_below="@+id/login_password"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/create_user_button"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:text="New User"/>
 </RelativeLayout>
