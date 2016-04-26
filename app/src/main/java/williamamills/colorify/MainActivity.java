@@ -78,14 +78,14 @@ public class MainActivity extends Activity {
                         locationHelper.execute();
                         break;
                     case 2:
-                        popularHelper = new InstagramAPIHelper(activity, getApplicationContext());
-                        popularHelper.execute();
+                        InstagramColorAPIHelper colorHelper = new InstagramColorAPIHelper(activity, getApplicationContext(), (String)colorSpinner.getSelectedItem());
+                        colorHelper.execute();
                         break;
                 }
             }
         });
         Button b2 = (Button) findViewById(R.id.b2);
-        b2.setText("Instagram Test");
+        b2.setText("Login Test");
         b2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -96,13 +96,7 @@ public class MainActivity extends Activity {
 
     }
     public void setJSON(String[] obj, ArrayList<Photo> photoList){
-        GetBitmap g = new GetBitmap(getApplicationContext(), photoList);
-        try {
-            g.execute(obj);
-            g.get(1000, TimeUnit.MILLISECONDS);
-        }catch(Exception e){
 
-        }
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

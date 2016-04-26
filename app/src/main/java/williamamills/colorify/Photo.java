@@ -13,6 +13,7 @@ public class Photo implements Parcelable{
     private String likes;
     private String bitmapAddress;
     private String location;
+    private String color = "N/A";
 
     public Photo(String _caption, String _tags, String _likes, String _bitmapAddress, String _location){
         caption = _caption;
@@ -28,11 +29,12 @@ public class Photo implements Parcelable{
     public void setBitmapAddress(String _bitmapAddress){
         bitmapAddress = _bitmapAddress;
     }
-
+    public void setColor(String _color){color = _color;}
+    public String getColor(){return color;}
 
     // Parcelling part
     public Photo(Parcel in){
-        String[] data = new String[5];
+        String[] data = new String[6];
 
         in.readStringArray(data);
         this.caption = data[0];
@@ -40,6 +42,7 @@ public class Photo implements Parcelable{
         this.likes = data[2];
         this.bitmapAddress = data[3];
         this.location = data[4];
+        this.color = data[5];
     }
 
     @Override
@@ -51,7 +54,7 @@ public class Photo implements Parcelable{
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeStringArray(new String[] {this.caption,
                 this.tags,
-                this.likes, this.bitmapAddress, this.location});
+                this.likes, this.bitmapAddress, this.location, this.color});
     }
     public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
         public Photo createFromParcel(Parcel in) {

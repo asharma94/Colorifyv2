@@ -1,12 +1,10 @@
 package williamamills.colorify;
 
 /**
- * Created by Nishant on 4/9/16.
+ * Created by Alexander on 4/26/2016.
  */
 
 import android.content.Context;
-import android.location.Address;
-import android.location.Geocoder;
 import android.os.AsyncTask;
 import android.widget.Toast;
 
@@ -14,27 +12,20 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
-import java.net.URL;
-import java.net.HttpURLConnection;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-public class InstagramAPIHelper extends AsyncTask<Void, Void, String> {
+public class InstagramColorAPIHelper extends AsyncTask<Void, Void, String> {
 
     /* Popular Endpoint*/
     String API_URL = "https://api.instagram.com/v1/media/popular?client_id=e05c462ebd86446ea48a5af73769b602";
-    String start_location_url = "https://api.instagram.com/v1/locations/";
-    String end_location_url = "/media/recent?client_id=e05c462ebd86446ea48a5af73769b602";
-    String start_tags_url = "https://api.instagram.com/v1/tags/";
-    String end_tags_url = "/media/recent?client_id=e05c462ebd86446ea48a5af73769b602";
-    String latlng = "https://api.instagram.com/v1/locations/search?lat=" + 1 + "&lng="+ 2+ "&access_token=Your-Act";
     Context ctx;
     MainActivity activity;
-    LatLng locationLat;
+    String searchedColor;
 
     protected void onPreExecute() {
         /* initialization before network call in background,
@@ -49,17 +40,16 @@ public class InstagramAPIHelper extends AsyncTask<Void, Void, String> {
             longitude = lon;
         }
     }
-    public InstagramAPIHelper(MainActivity act, Context context){
+    public InstagramColorAPIHelper(MainActivity act, Context context, String _color){
         activity = act;
         ctx = context;
+        searchedColor = _color;
     }
 
     protected String doInBackground(Void... urls) {
 
         try {
             URL url = new URL(API_URL);
-            //locationLat.longitude*=-1;
-            //URL url = new URL("https://api.instagram.com/v1/locations/search?lat=" + locationLat.latitude + "&lng="+ locationLat.longitude+ "&client_id=e05c462ebd86446ea48a5af73769b602");
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
             try {
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
@@ -127,7 +117,8 @@ public class InstagramAPIHelper extends AsyncTask<Void, Void, String> {
                     photoList.add(photo);
                 }
                 String[] array = tester.toArray(new String[0]);
-                GetBitmap g = new GetBitmap(ctx, photoList, false);
+
+                GetBitmap g = new GetBitmap(ctx, photoList, true);
                 try {
                     g.execute(array);
                     g.get(1000, TimeUnit.MILLISECONDS);

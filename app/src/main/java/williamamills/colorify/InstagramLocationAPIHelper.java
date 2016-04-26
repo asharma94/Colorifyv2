@@ -21,6 +21,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class InstagramLocationAPIHelper extends AsyncTask<Void, Void, String> {
 
@@ -162,11 +163,13 @@ public class InstagramLocationAPIHelper extends AsyncTask<Void, Void, String> {
                     photoList.add(photo);
                 }
                 String[] array = tester.toArray(new String[0]);
-                activity.setJSON(array, photoList);
-                //String thumbnail_url = thumbnail.getString("url");
+                GetBitmap g = new GetBitmap(ctx, photoList, false);
+                try {
+                    g.execute(array);
+                    g.get(1000, TimeUnit.MILLISECONDS);
+                }catch(Exception e){
 
-                /* Uncomment to see the returned color of the photo at index 1 */
-                //new ColorHelper().execute(thumbnail_url);
+                }
 
                 System.out.println(data.length()); //print number of objects returned (~24)
             } catch(JSONException e){

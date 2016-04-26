@@ -34,10 +34,12 @@ public class GetBitmap extends AsyncTask<String, Void, ArrayList<Bitmap>> {
     }
     Context ctx;
     ArrayList<Photo> photoList;
+    Boolean searchColor;
 
-    public GetBitmap(Context context, ArrayList<Photo> p){
+    public GetBitmap(Context context, ArrayList<Photo> p, Boolean _searchColor){
         ctx = context;
         photoList = p;
+        searchColor = _searchColor;
     }
 
     protected ArrayList<Bitmap> doInBackground(String... urls) {
@@ -82,6 +84,10 @@ public class GetBitmap extends AsyncTask<String, Void, ArrayList<Bitmap>> {
             }
             Bundle extras = new Bundle();
             //extras.putInt("uris", response.size());
+            if(searchColor){
+                OpenCVHelper openCVHelper = new OpenCVHelper(ctx);//// FIXME: 4/26/2016 Doesn't work
+                openCVHelper.execute();
+            }
             extras.putParcelableArrayList("photos", photoList);
             i.putExtras(extras);
             i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
