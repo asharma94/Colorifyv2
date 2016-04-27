@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory;
 import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -27,7 +28,7 @@ public class ImageViewActivity extends Activity {
         Bundle extras = getIntent().getExtras();
         u = extras.getInt("uri");
         try{
-            imageView.setImageBitmap(BitmapFactory.decodeStream(openFileInput("myImage" + u)));
+            imageView.setImageBitmap(BitmapFactory.decodeStream(openFileInput(getResources().getString(R.string.image_path) + u)));
         }catch (FileNotFoundException e){
             Toast.makeText(getApplicationContext(), "Image Not Found", Toast.LENGTH_SHORT).show();
         }
@@ -46,7 +47,7 @@ public class ImageViewActivity extends Activity {
                     }
                     next.setVisibility(View.VISIBLE);
                     try {
-                        imageView.setImageBitmap(BitmapFactory.decodeStream(openFileInput("myImage" + u)));
+                        imageView.setImageBitmap(BitmapFactory.decodeStream(openFileInput(getResources().getString(R.string.image_path) + u)));
                     }catch (FileNotFoundException e){
 
                     }
@@ -63,10 +64,21 @@ public class ImageViewActivity extends Activity {
                     }
                     previous.setVisibility(View.VISIBLE);
                     try{
-                        imageView.setImageBitmap(BitmapFactory.decodeStream(openFileInput("myImage"+u)));
+                        imageView.setImageBitmap(BitmapFactory.decodeStream(openFileInput(getResources().getString(R.string.image_path)+u)));
                     }catch (FileNotFoundException e){
 
                     }
+                }
+            }
+        });
+        Button saveButton = (Button) findViewById(R.id.save_button);
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try{
+                MediaStore.Images.Media.insertImage(getContentResolver(), BitmapFactory.decodeStream(openFileInput(getResources().getString(R.string.image_path)+u)), "Photo" , "What a great photo");
+                }catch(Exception e){
+                    Toast.makeText(getApplicationContext(), "Error saving photo", Toast.LENGTH_SHORT).show();
                 }
             }
         });

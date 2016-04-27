@@ -51,7 +51,7 @@ public class ItemsList extends ListActivity {
         Integer numImages = photoList.size();
         for(int k = 0; k < numImages; k++){
             try{
-                uris.add(BitmapFactory.decodeStream(openFileInput("myImage" + k)));
+                uris.add(BitmapFactory.decodeStream(openFileInput(getResources().getString(R.string.image_path) + k)));
                 if(k < 3)
                     bitmapCache.put(k, (Bitmap) uris.get(k));
             }catch(Exception e){
@@ -139,7 +139,7 @@ public class ItemsList extends ListActivity {
         @Override
         protected Bitmap doInBackground(Integer... params) {
             data = params[0];
-            final Bitmap b = getScaledImage("myImage" + data);
+            final Bitmap b = getScaledImage(mCtx.getResources().getString(R.string.image_path) + data);
             itemsList.addBitmapToMemoryCache(data, b);
             return b;
         }
@@ -177,7 +177,7 @@ public class ItemsList extends ListActivity {
 
                 //InputStream inputStream = mCtx.getContentResolver().openInputStream(imageUri);
 
-                bitmap = BitmapFactory.decodeStream(mCtx.openFileInput("myImage"+data), null, options);
+                bitmap = BitmapFactory.decodeStream(mCtx.openFileInput(mCtx.getResources().getString(R.string.image_path)+data), null, options);
                 //BitmapFactory.decodeStream(imagePath, null, options);
             } catch (FileNotFoundException e) {
                 e.printStackTrace();

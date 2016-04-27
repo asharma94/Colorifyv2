@@ -157,7 +157,7 @@ public class InstagramLocationAPIHelper extends AsyncTask<Void, Void, String> {
                     if(!test.isNull("likes")){
                         likes = test.getJSONObject("likes").getString("count");
                     }
-                    Photo photo = new Photo(caption, tags, likes, "myImage" + i, location);//location, tags, caption);
+                    Photo photo = new Photo(caption, tags, likes, ctx.getResources().getString(R.string.image_path) + i, location);//location, tags, caption);
                     //tester.add(thumbnailUrl);
                     tester.add(highQuality);
                     photoList.add(photo);

@@ -12,7 +12,8 @@
     <string name="firebase_url">https://colorify.firebaseIO.com</string>
     <string name="content_description">Image from Instagram</string>
     <string name="spinner_title">Search Choice</string>
-
+    <string name="image_path">myImage</string>
+    <string name="opencv_image_path">myCVImage</string>
     <string-array name="spinner_choices">
         <item>Popular</item>
         <item>Location</item>
