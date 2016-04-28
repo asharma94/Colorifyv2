@@ -36,6 +36,14 @@ public class InstagramAPIHelper extends AsyncTask<Void, Void, String> {
     MainActivity activity;
     LatLng locationLat;
 
+    String highQuality;
+    String tags;
+    String caption;
+    String location;
+    String likes;
+    int numReturned;
+
+
     protected void onPreExecute() {
         /* initialization before network call in background,
         * potentially do add different endpoints/search criteria */
@@ -84,41 +92,40 @@ public class InstagramAPIHelper extends AsyncTask<Void, Void, String> {
     protected void onPostExecute(String response) {
         /* what do with the network call response,
          * potentially to store into sql db */
-        if(response == null) {
+        if (response == null) {
             Toast.makeText(ctx, "THERE WAS AN ERROR RETRIEVING JSON DATA", Toast.LENGTH_LONG).show();
             System.out.println("THERE WAS AN ERROR RETRIEVING JSON DATA");
-        }
-        else {
-            try{
+        } else {
+            try {
                 JSONObject json = new JSONObject(response); //contains meta and data
                 JSONArray data = json.getJSONArray("data"); //only get data, ignore meta
-
-                for(int i =0;i<data.length();i++){
+                numReturned = data.length();
+                for (int i = 0; i < data.length(); i++) {
                     System.out.println(data.getJSONObject(i)); // print returned json objects
                 }
                 ArrayList<String> tester = new ArrayList<>();
                 ArrayList<Photo> photoList = new ArrayList<>();
-                for(int i = 0; i < data.length(); i++) {
+                for (int i = 0; i < numReturned; i++) {
                     JSONObject test = data.getJSONObject(i); //photo at index 1
                     JSONObject images = test.getJSONObject("images");
                     //JSONObject thumbnail = images.getJSONObject("thumbnail");
                     //String thumbnailUrl = thumbnail.getString("url");
-                    String highQuality = images.getJSONObject("standard_resolution").getString("url");
+                    highQuality = images.getJSONObject("standard_resolution").getString("url");
 
-                    String caption = "";
-                    if(!test.isNull("caption")){
+                    caption = "";
+                    if (!test.isNull("caption")) {
                         caption = test.getJSONObject("caption").getString("text");
                     }
-                    String tags = "";
-                    if(!test.isNull("tags")){
+                    tags = "";
+                    if (!test.isNull("tags")) {
                         tags = test.getString("tags");
                     }
-                    String location = "";
-                    if(!test.isNull("location")){
+                    location = "";
+                    if (!test.isNull("location")) {
                         location = test.getString("location");
                     }
-                    String likes = "";
-                    if(!test.isNull("likes")){
+                    likes = "";
+                    if (!test.isNull("likes")) {
                         likes = test.getJSONObject("likes").getString("count");
                     }
                     Photo photo = new Photo(caption, tags, likes, ctx.getResources().getString(R.string.image_path) + i, location);//location, tags, caption);
@@ -131,18 +138,38 @@ public class InstagramAPIHelper extends AsyncTask<Void, Void, String> {
                 try {
                     g.execute(array);
                     g.get(1000, TimeUnit.MILLISECONDS);
-                }catch(Exception e){
+                } catch (Exception e) {
 
                 }
 
                 System.out.println(data.length()); //print number of objects returned (~24)
-            } catch(JSONException e){
+            } catch (JSONException e) {
                 System.out.println("JSONERROR: " + e.getMessage());
             }
+        }
+    }
 
+        public String getHighQuality(){
+            return highQuality;
+        }
+
+        public String getTags(){
+            return tags;
+        }
+        public String getCaption(){
+            return caption;
+        }
+        public String getLocation(){
+            return location;
+        }
+        public String getLikes(){
+            return likes;
+        }
+        public int getNumReturned(){
+            return numReturned;
         }
 
     }
 
-}
+
 

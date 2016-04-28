@@ -26,7 +26,7 @@ import java.util.ArrayList;
 /**
  * Created by Alexander on 4/9/2016.
  */
-public class GetBitmap extends AsyncTask<String, Void, ArrayList<Bitmap>> {
+public class GetBitmap extends AsyncTask<String, Void, Boolean> {
     protected void onPreExecute() {
         /* initialization before network call in background,
         * potentially do add different endpoints/search criteria */
@@ -42,11 +42,12 @@ public class GetBitmap extends AsyncTask<String, Void, ArrayList<Bitmap>> {
         searchColor = _searchColor;
     }
 
-    protected ArrayList<Bitmap> doInBackground(String... urls) {
+    protected Boolean doInBackground(String... urls) {
         ArrayList<Bitmap> arrayList = new ArrayList<>();
         try {
             //URL url = new URL(urls[0]);
             boolean success = false;
+            int k = 0;
             for(String u : urls) {
                 java.net.URL url = new java.net.URL(u);
                 HttpURLConnection connection = (HttpURLConnection) url
@@ -56,10 +57,12 @@ public class GetBitmap extends AsyncTask<String, Void, ArrayList<Bitmap>> {
                 InputStream input = connection.getInputStream();
                 Bitmap myBitmap = BitmapFactory.decodeStream(input); //// FIXME: 4/13/2016
                 arrayList.add(myBitmap);
-                //myBitmap.recycle();
+                createImageFromBitmap(myBitmap, k);
+                k++;
+                myBitmap.recycle();
                 success = true;
             }
-            return arrayList;
+            return true;
         } catch (IOException e) {
             e.printStackTrace();
             return null;
@@ -70,18 +73,15 @@ public class GetBitmap extends AsyncTask<String, Void, ArrayList<Bitmap>> {
 
     }
 
-    protected void onPostExecute(ArrayList<Bitmap> response) {
+    protected void onPostExecute(Boolean response) {
         /* what do with the network call response,
          * potentially to store into sql db */
-        if(response.isEmpty()) {
+        if(response) {
             Toast.makeText(ctx, "THERE WAS AN ERROR RETRIEVING JSON DATA", Toast.LENGTH_LONG).show();
             System.out.println("THERE WAS AN ERROR RETRIEVING JSON DATA");
         }
         else {
             Intent i = new Intent(ctx, ItemsList.class);
-            for(int k = 0; k < response.size(); k++) {
-                createImageFromBitmap(response.get(k), k);
-            }
             Bundle extras = new Bundle();
             //extras.putInt("uris", response.size());
             if(searchColor){
