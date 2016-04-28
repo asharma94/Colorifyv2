@@ -14,6 +14,8 @@
     <string name="spinner_title">Search Choice</string>
     <string name="image_path">myImage</string>
     <string name="opencv_image_path">myCVImage</string>
+    <string name="empty_location_string">Must enter a location to search</string>
+    <string name="image_not_saved">Error saving image</string>
     <string-array name="spinner_choices">
         <item>Popular</item>
         <item>Location</item>

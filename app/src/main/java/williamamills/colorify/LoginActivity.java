@@ -220,6 +220,9 @@ public class LoginActivity extends Activity {
         LinearLayout layout = new LinearLayout(getApplicationContext());
         layout.setOrientation(LinearLayout.VERTICAL);
 
+        edittextUser.setId(R.id.my_edit_text_1);
+        edittextUser.setId(R.id.my_edit_text_2);
+
         layout.addView(edittextUser);
         layout.addView(edittextPassword);
 

@@ -28,6 +28,11 @@ import static android.support.test.espresso.Espresso.onData;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.instanceOf;
 import static org.hamcrest.Matchers.is;
+import static android.support.test.espresso.assertion.ViewAssertions.matches;
+import static android.support.test.espresso.matcher.RootMatchers.withDecorView;
+import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static android.support.test.espresso.matcher.ViewMatchers.withText;
+import static org.hamcrest.Matchers.not;
 
 @RunWith(AndroidJUnit4.class)
 public class MainActivityTest {
@@ -35,47 +40,47 @@ public class MainActivityTest {
 
 
 
-        private String mStringToBetyped;
+    private String mStringToBetyped;
 
-        @Rule
-        public ActivityTestRule<MainActivity> mActivityRule = new ActivityTestRule<>(
-                MainActivity.class);
+    @Rule
+    public ActivityTestRule<MainActivity> mActivityRule = new ActivityTestRule<>(
+            MainActivity.class);
 
-        @Before
-        public void initValidString() {
-            // Specify a valid string.
-            mStringToBetyped = "barcelona";
-            Intents.init();
-        }
+    @Before
+    public void initValidString() {
+        // Specify a valid string.
+        mStringToBetyped = "barcelona";
+        Intents.init();
+    }
     @After
     public void end(){
         Intents.release();
     }
 
-        @Test
-        public void searchByPopular() {
+    @Test
+    public void searchByPopular() {
 
-            // Type text and then press the button.
-            //onView(withId(R.id.main_activity_edit_text))
-              //      .perform(typeText(mStringToBetyped), closeSoftKeyboard());
-            onView(withId(R.id.main_enter)).perform(click());
-            // Check that the text was changed.
-            intended(hasComponent(ItemsList.class.getName()));
-            //onView(withId(R.id.main_activity_edit_text))
-             //       .check(matches(withText(mStringToBetyped)));
-        }
+        // Type text and then press the button.
+        //onView(withId(R.id.main_activity_edit_text))
+        //      .perform(typeText(mStringToBetyped), closeSoftKeyboard());
+        onView(withId(R.id.main_enter)).perform(click());
+        // Check that the text was changed.
+        intended(hasComponent(ItemsList.class.getName()));
+        //onView(withId(R.id.main_activity_edit_text))
+        //       .check(matches(withText(mStringToBetyped)));
+    }
     @Test
     public void searchByLocation(){
         onView(withId(R.id.main_activity_choice_spinner))
                 .perform(click());
         onData(allOf(is(instanceOf(String.class)), is("Location"))).perform(click());
         onView(withId(R.id.main_activity_edit_text))
-             .perform(typeText(mStringToBetyped), closeSoftKeyboard());
+                .perform(typeText(mStringToBetyped), closeSoftKeyboard());
         onView(withId(R.id.main_enter)).perform(click());
         // Check that the text was changed.
         intended(hasComponent(ItemsList.class.getName()));
     }
-    @Test
+   /* @Test
     public void searchByColor(){
         onView(withId(R.id.main_activity_choice_spinner))
                 .perform(click());
@@ -87,5 +92,16 @@ public class MainActivityTest {
         // Check that the text was changed.
         intended(hasComponent(ItemsList.class.getName()));
 
+    }*/
+
+    @Test
+    public void searchEmptyStringLocation(){
+        onView(withId(R.id.main_activity_choice_spinner))
+                .perform(click());
+        onData(allOf(is(instanceOf(String.class)), is("Location"))).perform(click());
+        onView(withId(R.id.main_activity_edit_text))
+                .perform(typeText(""), closeSoftKeyboard());
+        onView(withId(R.id.main_enter)).perform(click());
+        onView(withText(R.string.empty_location_string)).inRoot(withDecorView(not(is(mActivityRule.getActivity().getWindow().getDecorView())))).check(matches(isDisplayed()));
     }
 }

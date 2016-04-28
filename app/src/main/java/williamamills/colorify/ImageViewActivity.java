@@ -78,7 +78,7 @@ public class ImageViewActivity extends Activity {
                 try{
                 MediaStore.Images.Media.insertImage(getContentResolver(), BitmapFactory.decodeStream(openFileInput(getResources().getString(R.string.image_path)+u)), "Photo" , "What a great photo");
                 }catch(Exception e){
-                    Toast.makeText(getApplicationContext(), "Error saving photo", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), getResources().getString(R.string.image_not_saved), Toast.LENGTH_SHORT).show();
                 }
             }
         });
