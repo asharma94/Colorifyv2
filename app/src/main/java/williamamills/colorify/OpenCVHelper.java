@@ -45,7 +45,7 @@ public class OpenCVHelper extends AsyncTask<String, Void, String[]> {
     protected String[] doInBackground(String... url){
         Mat img = null;
         try {
-            img = Utils.loadResource(ctx, R.drawable.dog, Imgcodecs.CV_LOAD_IMAGE_COLOR); // Load image
+            img = Utils.loadResource(ctx, R.drawable.lena, Imgcodecs.CV_LOAD_IMAGE_COLOR); // Load image
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -54,7 +54,7 @@ import static org.hamcrest.Matchers.not;
 public class LoginActivityTest {
     private String userStringToBetyped;
     private String passwordStringToBetyped;
-    private String newUser = "user1@user1.com";
+    private String newUser = "user2@user1.com";
     private String newPassword= "hey";
 
     @Rule
@@ -89,7 +89,7 @@ public class LoginActivityTest {
         onView(withId(R.id.login_password))
                 .perform(typeText("Not a password"), closeSoftKeyboard());
         onView(withId(R.id.login_button)).perform(click());
-        onView(withText("")).inRoot(withDecorView(not(is(mActivityRule.getActivity().getWindow().getDecorView())))).check(matches(not(isDisplayed())));
+        onView(withText("FirebaseError:")).inRoot(withDecorView(not(is(mActivityRule.getActivity().getWindow().getDecorView())))).check(matches(not(isDisplayed())));
     }
     @Test
     public void makeUserWithUser(){

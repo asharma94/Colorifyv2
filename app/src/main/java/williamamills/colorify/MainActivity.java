@@ -13,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -77,7 +78,9 @@ public class MainActivity extends Activity {
                         popularHelper.execute();
                         break;
                     case 1:
-                        if(editText.getText().toString().matches("")){break;}
+                        if(editText.getText().toString().matches("")){
+                            Toast.makeText(getApplicationContext(), getResources().getString(R.string.empty_location_string), Toast.LENGTH_SHORT).show();
+                            break;}
                         InstagramLocationAPIHelper locationHelper = new InstagramLocationAPIHelper(activity, getApplicationContext(), editText.getText().toString().trim());
                         locationHelper.execute();
                         break;

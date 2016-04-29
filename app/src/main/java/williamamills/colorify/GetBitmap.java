@@ -76,7 +76,7 @@ public class GetBitmap extends AsyncTask<String, Void, Boolean> {
     protected void onPostExecute(Boolean response) {
         /* what do with the network call response,
          * potentially to store into sql db */
-        if(response) {
+        if(!response) {
             Toast.makeText(ctx, "THERE WAS AN ERROR RETRIEVING JSON DATA", Toast.LENGTH_LONG).show();
             System.out.println("THERE WAS AN ERROR RETRIEVING JSON DATA");
         }
