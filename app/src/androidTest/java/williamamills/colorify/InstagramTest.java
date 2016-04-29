@@ -3,6 +3,8 @@ package williamamills.colorify;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
@@ -10,6 +12,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.CountDownLatch;
+import java.util.ArrayList;
 
 import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertNotNull;
@@ -62,7 +65,16 @@ public class InstagramTest {
 
     @Test
     public void testCount(){
-        assertEquals(24,apiHelper.getNumReturned());
+        assertEquals(24, apiHelper.getNumReturned());
     }
+
+    @Test
+    public void testDB() throws JSONException {
+       DBHelper db =  DBHelper.getInstance(mActivityRule.getActivity().getApplicationContext());
+       JSONArray data = apiHelper.getData();
+       db.insertPhoto(data.getJSONObject(0),"test");
+        assertNotNull(db.getPhoto(1));
+    }
+
 
 }
