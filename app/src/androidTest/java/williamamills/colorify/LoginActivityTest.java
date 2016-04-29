@@ -89,8 +89,9 @@ public class LoginActivityTest {
         onView(withId(R.id.login_password))
                 .perform(typeText("Not a password"), closeSoftKeyboard());
         onView(withId(R.id.login_button)).perform(click());
-        onView(withText("FirebaseError:")).inRoot(withDecorView(not(is(mActivityRule.getActivity().getWindow().getDecorView())))).check(matches(not(isDisplayed())));
+        onView(withText("Error")).inRoot(withDecorView(not(is(mActivityRule.getActivity().getWindow().getDecorView())))).check(matches(isDisplayed()));
     }
+
     @Test
     public void makeUserWithUser(){
         onView(withId(R.id.create_user_button))
@@ -127,12 +128,17 @@ public class LoginActivityTest {
         //onView(withId(R.id.my_edit_text_1))
         onView(withHint("Email"))
                 .perform(typeText(newUser), closeSoftKeyboard());
+
         //onView(withId(R.id.my_edit_text_2))
         onView(withHint("New Password"))
                 .perform(typeText(newPassword), closeSoftKeyboard());
         onView(withText("Ok")).perform(click());
         Espresso.unregisterIdlingResources(idlingResource);
+        IdlingResource idlingResource2 = new ElapsedTimeIdlingResource(2000);
+        Espresso.registerIdlingResources(idlingResource2);
+
         intended(hasComponent(MainActivity.class.getName()));
+        Espresso.unregisterIdlingResources(idlingResource2);
     }
 
     private class ElapsedTimeIdlingResource implements IdlingResource{
