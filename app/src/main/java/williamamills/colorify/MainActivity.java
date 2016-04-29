@@ -55,6 +55,10 @@ public class MainActivity extends Activity {
                         editText.setVisibility(View.INVISIBLE);
                         colorSpinner.setVisibility(View.VISIBLE);
                         break;
+                    case 3://tag
+                        editText.setVisibility(View.VISIBLE);
+                        colorSpinner.setVisibility(View.INVISIBLE);
+                        break;
                 }
             }
             @Override
@@ -80,6 +84,11 @@ public class MainActivity extends Activity {
                     case 2:
                         InstagramColorAPIHelper colorHelper = new InstagramColorAPIHelper(activity, getApplicationContext(), (String)colorSpinner.getSelectedItem());
                         colorHelper.execute();
+                        break;
+                    case 3:
+                        if(editText.getText().toString().matches("")){break;}
+                        InstagramTagAPIHelper tagHelper = new InstagramTagAPIHelper(activity, getApplicationContext(), editText.getText().toString().trim());
+                        tagHelper.execute();
                         break;
                 }
             }
