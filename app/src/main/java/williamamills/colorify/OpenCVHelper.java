@@ -12,6 +12,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -27,10 +28,8 @@ import org.opencv.core.TermCriteria;
 import org.opencv.imgcodecs.Imgcodecs;
 import org.opencv.imgproc.Imgproc;
 
-/**
- * Created by Ankit on 4/18/2016.
- */
-public class OpenCVHelper extends AsyncTask<String, Void, String[]> {
+
+public class OpenCVHelper extends AsyncTask<CVHelperParams, Void, ArrayList<String[]>> {
 
     Context ctx;
 
@@ -42,39 +41,27 @@ public class OpenCVHelper extends AsyncTask<String, Void, String[]> {
         ctx = c;
     }
 
-    protected String[] doInBackground(String... url){
-        Mat img = null;
-        try {
-            img = Utils.loadResource(ctx, R.drawable.dog, Imgcodecs.CV_LOAD_IMAGE_COLOR); // Load image
-        } catch (IOException e) {
-            e.printStackTrace();
+    protected ArrayList<String[]> doInBackground(CVHelperParams... params){
+
+        ArrayList<String[]> allColors = new ArrayList<>();
+
+        for(int j = 0; j < params[0].getCount(); j += 1) {
+            Mat img = new Mat();
+            try {
+                Bitmap original = BitmapFactory.decodeStream(ctx.openFileInput(ctx.getResources().getString(R.string.image_path) + j));
+                Utils.bitmapToMat(original, img); // Load image
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            int k = 2; // number of centroids
+            Mat clusters = cluster(img, k).get(0); // Perform k-means algorithm
+            Imgproc.cvtColor(clusters, clusters, Imgproc.COLOR_BGR2RGB); // Convert to Mat to RGB Color Space
+            Bitmap b = Bitmap.createBitmap(clusters.width(), clusters.height(), Bitmap.Config.ARGB_8888); // Create bitmap
+            Utils.matToBitmap(clusters, b); // Write to bitmap
+            String[] colors = getColorBuckets(b); // Place colors of image into buckets
+            allColors.add(colors);
         }
-        int k = 2;
-        Mat clusters = cluster(img, k).get(0); // Perform k-means algorithm
-
-        Imgproc.cvtColor(clusters, clusters, Imgproc.COLOR_BGR2RGB); // Convert to RGB Color Space
-
-        Bitmap b = Bitmap.createBitmap(clusters.width(), clusters.height(), Bitmap.Config.ARGB_8888);
-        Utils.matToBitmap(clusters,b); // Write to bitmap
-
-//        File file = new File(ctx.getFilesDir(), "test2.png");
-//        // Imgcodecs.imwrite(file.getPath(), clusters);
-//        System.out.print("Writing\n");
-//
-//        try {
-//            OutputStream outStream = new FileOutputStream(file);
-//            b.compress(Bitmap.CompressFormat.PNG, 100, outStream);
-//        } catch (FileNotFoundException e) {
-//            e.printStackTrace();
-//        }
-
-        String[] colors = getColors(b); // Place colors of image into buckets
-
-        System.out.println(colors[0]);
-        System.out.println(colors[1]);
-
-
-        return colors;
+        return allColors;
     }
     public static List<Mat> cluster(Mat cutout, int k) {
         Mat samples = cutout.reshape(1, cutout.cols() * cutout.rows());
@@ -109,30 +96,10 @@ public class OpenCVHelper extends AsyncTask<String, Void, String[]> {
         return clusters;
     }
 
-    private static String[] getColors(Bitmap b) {
+    private static String[] getColorBuckets(Bitmap b) {
 
         int c1 = b.getPixel(30,30);
-        int c2 = 0;
-
-        next:
-        for (int y = 20; y < b.getHeight()-20; y++)
-        {
-            for (int x = 20; x < b.getWidth()-20; x++) {
-                int tempColor = b.getPixel(x, y);
-                if (tempColor != c1) {
-                    c2 = tempColor;
-                    break next;
-                }
-            }
-        }
-
-        String hexColor1 = String.format("#%06X", (0xFFFFFF & c1));
-        String hexColor2 = String.format("#%06X", (0xFFFFFF & c2));
-
-        System.out.println(c1);
-        System.out.println(hexColor1);
-        System.out.println(c2);
-        System.out.println(hexColor2);
+        int c2 = extractColors(b, c1);
 
         float[] hsv1 = new float[3];
         float[] hsv2 = new float[3];
@@ -162,6 +129,19 @@ public class OpenCVHelper extends AsyncTask<String, Void, String[]> {
             colors[1] = s2;
         }
         return colors;
+    }
+
+    private static int extractColors (Bitmap b, int colorOne) {
+        for (int y = 20; y < b.getHeight() - 20; y++) {
+            for (int x = 20; x < b.getWidth() - 20; x++) {
+                int tempColor = b.getPixel(x, y);
+                if (tempColor != colorOne) {
+                    int colorTwo = tempColor;
+                    return colorTwo;
+                }
+            }
+        }
+        return 0;
     }
 
     private static String getBucket(float hue){
