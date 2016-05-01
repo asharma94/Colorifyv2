@@ -85,8 +85,8 @@ public class GetBitmap extends AsyncTask<String, Void, Boolean> {
             Bundle extras = new Bundle();
             //extras.putInt("uris", response.size());
             if(searchColor){
-                OpenCVHelper openCVHelper = new OpenCVHelper(ctx);//// FIXME: 4/26/2016 Doesn't work
-                openCVHelper.execute();
+                //OpenCVHelper openCVHelper = new OpenCVHelper(ctx);//// FIXME: 4/26/2016 Doesn't work
+                //openCVHelper.execute();
             }
             extras.putParcelableArrayList("photos", photoList);
             i.putExtras(extras);

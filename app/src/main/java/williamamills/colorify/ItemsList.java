@@ -29,7 +29,7 @@ import java.util.ArrayList;
 public class ItemsList extends ListActivity {
 
     private ItemsAdapter adapter;
-    private ArrayList<Parcelable> uris;
+    //private ArrayList<Parcelable> uris;
     //private ArrayList<Parcelable> u;
     LruCache<Integer, Bitmap> bitmapCache;
     ItemsList itemsList;
@@ -37,7 +37,7 @@ public class ItemsList extends ListActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        uris = new ArrayList<>();
+        //uris = new ArrayList<>();
         setContentView(R.layout.activity_items_list);
         Bundle extras = getIntent().getExtras();
         ArrayList<ClipData.Item> arrayList = new ArrayList<>();
@@ -51,25 +51,25 @@ public class ItemsList extends ListActivity {
         Integer numImages = photoList.size();
         for(int k = 0; k < numImages; k++){
             try{
-                uris.add(BitmapFactory.decodeStream(openFileInput(getResources().getString(R.string.image_path) + k)));
-                if(k < 3)
-                    bitmapCache.put(k, (Bitmap) uris.get(k));
+                //uris.add(BitmapFactory.decodeStream(openFileInput(getResources().getString(R.string.image_path) + k)));
+                if(k < 5)
+                    bitmapCache.put(k, (Bitmap) BitmapFactory.decodeStream(openFileInput(getResources().getString(R.string.image_path) + k)));
             }catch(Exception e){
 
             }
         }
-        this.adapter = new ItemsAdapter(this, R.layout.items_list_item, uris);
+        this.adapter = new ItemsAdapter(this, R.layout.items_list_item, photoList);
         setListAdapter(this.adapter);
         itemsList = this;
     }
 
-    private class ItemsAdapter extends ArrayAdapter<Parcelable> {
+    private class ItemsAdapter extends ArrayAdapter<Photo> {
 
-        private ArrayList<Parcelable> items;
+        private ArrayList<Photo> items;
 
-        public ItemsAdapter(Context context, int textViewResourceId, ArrayList<Parcelable> items) {
-            super(context, textViewResourceId, items);
-            this.items = items;
+        public ItemsAdapter(Context context, int textViewResourceId, ArrayList<Photo> _items) {
+            super(context, textViewResourceId, _items);
+            this.items = _items;
         }
 
         @Override
@@ -110,6 +110,7 @@ public class ItemsList extends ListActivity {
         Intent i = new Intent(getApplicationContext(), ImageViewActivity.class);
         Bundle extras = new Bundle();
         extras.putInt("uri", position);
+        extras.putParcelableArrayList("photoList", photoList);
         i.putExtras(extras);
         startActivity(i);
     }

@@ -87,6 +87,7 @@ public class MainActivity extends Activity {
                     case 2:
                         InstagramColorAPIHelper colorHelper = new InstagramColorAPIHelper(activity, getApplicationContext(), (String)colorSpinner.getSelectedItem());
                         colorHelper.execute();
+                        Toast.makeText(getApplicationContext(), "Please Wait", Toast.LENGTH_LONG).show();
                         break;
                     case 3:
                         if(editText.getText().toString().matches("")){break;}
