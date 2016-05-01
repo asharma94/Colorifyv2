@@ -22,6 +22,7 @@ public class ImageViewActivity extends Activity {
     ImageView imageView;
     Integer u;
     Integer size;
+    ArrayList<Photo> photoList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,10 +31,10 @@ public class ImageViewActivity extends Activity {
         imageView = (ImageView) findViewById(R.id.image);
         Bundle extras = getIntent().getExtras();
         u = extras.getInt("uri");
-        ArrayList<Parcelable> dummy = extras.getParcelableArrayList("photoList");
-        size = dummy.size()-1;
+        photoList = extras.getParcelableArrayList("photoList");
+        size = photoList.size()-1;
         try{
-            imageView.setImageBitmap(BitmapFactory.decodeStream(openFileInput(getResources().getString(R.string.image_path) + u)));
+            imageView.setImageBitmap(BitmapFactory.decodeStream(openFileInput(photoList.get(u).getBitmapAddress())));
         }catch (FileNotFoundException e){
             Toast.makeText(getApplicationContext(), "Image Not Found", Toast.LENGTH_SHORT).show();
         }
@@ -41,6 +42,9 @@ public class ImageViewActivity extends Activity {
         final Button next = (Button) findViewById(R.id.next_button);
         if(u.equals(0)){
             previous.setVisibility(View.INVISIBLE);
+        }
+        if(u.equals(size)){
+            next.setVisibility(View.INVISIBLE);
         }
         previous.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -52,7 +56,7 @@ public class ImageViewActivity extends Activity {
                     }
                     next.setVisibility(View.VISIBLE);
                     try {
-                        imageView.setImageBitmap(BitmapFactory.decodeStream(openFileInput(getResources().getString(R.string.image_path) + u)));
+                        imageView.setImageBitmap(BitmapFactory.decodeStream(openFileInput(photoList.get(u).getBitmapAddress())));
                     }catch (FileNotFoundException e){
 
                     }
@@ -69,7 +73,7 @@ public class ImageViewActivity extends Activity {
                     }
                     previous.setVisibility(View.VISIBLE);
                     try{
-                        imageView.setImageBitmap(BitmapFactory.decodeStream(openFileInput(getResources().getString(R.string.image_path)+u)));
+                        imageView.setImageBitmap(BitmapFactory.decodeStream(openFileInput(photoList.get(u).getBitmapAddress())));
                     }catch (FileNotFoundException e){
 
                     }

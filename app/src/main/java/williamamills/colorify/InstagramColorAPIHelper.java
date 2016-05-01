@@ -50,6 +50,7 @@ public class InstagramColorAPIHelper extends AsyncTask<Void, Void, ArrayList<Str
     protected ArrayList<String> doInBackground(Void... urls) {
         StringBuilder stringBuilder = new StringBuilder();
         ArrayList<String> stringArrayList = new ArrayList<>();
+
         for(int i = 0; i < iterations; i++) {
             try {
                 URL url = new URL(API_URL);
@@ -62,6 +63,7 @@ public class InstagramColorAPIHelper extends AsyncTask<Void, Void, ArrayList<Str
                     }
                     bufferedReader.close();
                     stringArrayList.add(stringBuilder.toString());
+                    stringBuilder = new StringBuilder();
                    // return stringBuilder.toString();
                 } finally {
                     urlConnection.disconnect();

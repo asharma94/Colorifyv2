@@ -96,8 +96,8 @@ public class ItemsList extends ListActivity {
                 }
             }else{
                 iv.setImageResource(R.mipmap.ic_launcher);
-                BitmapWorkerTask task = new BitmapWorkerTask(iv, getApplicationContext(), itemsList);
-                task.execute(position);
+                BitmapWorkerTask task = new BitmapWorkerTask(iv, getApplicationContext(), itemsList, position);
+                task.execute(photoList.get(position).getBitmapAddress());
             }
 
             return v;
@@ -124,23 +124,25 @@ public class ItemsList extends ListActivity {
     }
 
 
-    class BitmapWorkerTask extends AsyncTask<Integer, Void, Bitmap> {
+    class BitmapWorkerTask extends AsyncTask<String, Void, Bitmap> {
         private final WeakReference<ImageView> imageViewReference;
         private int data = 0;
         private Context mCtx;
         private ItemsList itemsList;
-        public BitmapWorkerTask(ImageView imageView, Context context, ItemsList list) {
+        private Integer position;
+        public BitmapWorkerTask(ImageView imageView, Context context, ItemsList list, Integer pos) {
             // Use a WeakReference to ensure the ImageView can be garbage collected
             imageViewReference = new WeakReference<ImageView>(imageView);
             mCtx = context;
             itemsList = list;
+            position = pos;
         }
 
         // Decode image in background.
         @Override
-        protected Bitmap doInBackground(Integer... params) {
-            data = params[0];
-            final Bitmap b = getScaledImage(mCtx.getResources().getString(R.string.image_path) + data);
+        protected Bitmap doInBackground(String... path) {
+            //data = params[0];
+            final Bitmap b = getScaledImage(path[0]);//mCtx.getResources().getString(R.string.image_path) + data);
             itemsList.addBitmapToMemoryCache(data, b);
             return b;
         }
@@ -153,6 +155,7 @@ public class ItemsList extends ListActivity {
                 if (imageView != null) {
                     imageView.setImageBitmap(bitmap);
                 }
+                addBitmapToMemoryCache(position,bitmap);
             }
         }
         private Bitmap getScaledImage(String imagePath){
@@ -178,7 +181,7 @@ public class ItemsList extends ListActivity {
 
                 //InputStream inputStream = mCtx.getContentResolver().openInputStream(imageUri);
 
-                bitmap = BitmapFactory.decodeStream(mCtx.openFileInput(mCtx.getResources().getString(R.string.image_path)+data), null, options);
+                bitmap = BitmapFactory.decodeStream(mCtx.openFileInput(imagePath), null, options);
                 //BitmapFactory.decodeStream(imagePath, null, options);
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
