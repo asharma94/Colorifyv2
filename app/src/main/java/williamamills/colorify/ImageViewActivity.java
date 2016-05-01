@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory;
 import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.provider.MediaStore;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -15,10 +16,12 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 
 public class ImageViewActivity extends Activity {
     ImageView imageView;
     Integer u;
+    Integer size;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +30,8 @@ public class ImageViewActivity extends Activity {
         imageView = (ImageView) findViewById(R.id.image);
         Bundle extras = getIntent().getExtras();
         u = extras.getInt("uri");
+        ArrayList<Parcelable> dummy = extras.getParcelableArrayList("photoList");
+        size = dummy.size()-1;
         try{
             imageView.setImageBitmap(BitmapFactory.decodeStream(openFileInput(getResources().getString(R.string.image_path) + u)));
         }catch (FileNotFoundException e){
@@ -57,9 +62,9 @@ public class ImageViewActivity extends Activity {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!u.equals(23)){
+                if(!u.equals(size)){
                     u++;
-                    if(u.equals(23)){
+                    if(u.equals(size)){
                         next.setVisibility(View.INVISIBLE);
                     }
                     previous.setVisibility(View.VISIBLE);

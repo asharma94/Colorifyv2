@@ -43,6 +43,9 @@ public class InstagramAPIHelper extends AsyncTask<Void, Void, String> {
     String likes;
     int numReturned;
 
+    ArrayList<Photo> photoList;
+    JSONArray data;
+
 
     protected void onPreExecute() {
         /* initialization before network call in background,
@@ -98,13 +101,13 @@ public class InstagramAPIHelper extends AsyncTask<Void, Void, String> {
         } else {
             try {
                 JSONObject json = new JSONObject(response); //contains meta and data
-                JSONArray data = json.getJSONArray("data"); //only get data, ignore meta
+                data = json.getJSONArray("data"); //only get data, ignore meta
                 numReturned = data.length();
                 for (int i = 0; i < data.length(); i++) {
                     System.out.println(data.getJSONObject(i)); // print returned json objects
                 }
                 ArrayList<String> tester = new ArrayList<>();
-                ArrayList<Photo> photoList = new ArrayList<>();
+                photoList = new ArrayList<>();
                 for (int i = 0; i < numReturned; i++) {
                     JSONObject test = data.getJSONObject(i); //photo at index 1
                     JSONObject images = test.getJSONObject("images");
@@ -167,6 +170,14 @@ public class InstagramAPIHelper extends AsyncTask<Void, Void, String> {
         }
         public int getNumReturned(){
             return numReturned;
+        }
+
+        public ArrayList<Photo> getPhotos(){
+            return photoList;
+        }
+
+        public JSONArray getData(){
+            return data;
         }
 
     }

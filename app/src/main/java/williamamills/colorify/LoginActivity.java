@@ -212,7 +212,7 @@ public class LoginActivity extends Activity {
         edittextUser.setHintTextColor(Color.parseColor("#000000"));
         edittextUser.setTextColor(Color.parseColor("#000000"));
         final EditText edittextPassword = new EditText(getApplicationContext());
-        edittextPassword.setHint("Password");
+        edittextPassword.setHint("New Password");
         edittextPassword.setTextColor(Color.parseColor("#000000"));
         edittextPassword.setHintTextColor(Color.parseColor("#000000"));
         alert.setMessage("Create Username and Password");
