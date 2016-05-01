@@ -129,7 +129,7 @@ public class InstagramColorAPIHelper extends AsyncTask<Void, Void, ArrayList<Str
             }
                 String[] array = tester.toArray(new String[0]);
 
-                GetBitmap g = new GetBitmap(ctx, photoList, true);
+                GetBitmap g = new GetBitmap(ctx, photoList, true, searchedColor.toUpperCase());
                 try {
                     g.execute(array);
                     g.get(1000, TimeUnit.MILLISECONDS);

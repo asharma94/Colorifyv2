@@ -31,6 +31,10 @@ public class MainActivity extends Activity {
     EditText editText;
     Spinner colorSpinner;
 
+    static{
+        System.loadLibrary("opencv_java3");
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

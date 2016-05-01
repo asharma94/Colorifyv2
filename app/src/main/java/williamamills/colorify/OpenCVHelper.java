@@ -2,10 +2,12 @@ package williamamills.colorify;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.AsyncTask;
+import android.os.Bundle;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -15,7 +17,9 @@ import java.io.OutputStream;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Map;
 
 import org.opencv.android.Utils;
@@ -32,26 +36,34 @@ import org.opencv.imgproc.Imgproc;
 public class OpenCVHelper extends AsyncTask<CVHelperParams, Void, ArrayList<String[]>> {
 
     Context ctx;
+    ArrayList<Photo> photoList;
+    String colorToSearch;
 
     public enum myColors {
         RED, YELLOW, GREEN, CYAN, BLUE, PURPLE
     }
 
-    public OpenCVHelper(Context c) {
+    public OpenCVHelper(Context c, ArrayList<Photo> _photoList, String _colorToSearch) {
         ctx = c;
+        photoList = _photoList;
+        colorToSearch  = _colorToSearch;
     }
 
     protected ArrayList<String[]> doInBackground(CVHelperParams... params){
 
         ArrayList<String[]> allColors = new ArrayList<>();
 
-        for(int j = 0; j < params[0].getCount(); j += 1) {
-            Mat img = new Mat();
+        for(int j = 0; j < photoList.size(); j += 1) {
+            Mat img = null;// = new Mat();
             try {
                 Bitmap original = BitmapFactory.decodeStream(ctx.openFileInput(ctx.getResources().getString(R.string.image_path) + j));
+                img = Imgcodecs.imread(ctx.getFilesDir().getPath() + "/myImage" + j);
+                                //img = new Mat(original.getWidth(), original.getHeight(), CvType.CV_8U);
                 Utils.bitmapToMat(original, img); // Load image
+                original.recycle();
             } catch (Exception e) {
                 e.printStackTrace();
+                return null;
             }
             int k = 2; // number of centroids
             Mat clusters = cluster(img, k).get(0); // Perform k-means algorithm
@@ -60,8 +72,33 @@ public class OpenCVHelper extends AsyncTask<CVHelperParams, Void, ArrayList<Stri
             Utils.matToBitmap(clusters, b); // Write to bitmap
             String[] colors = getColorBuckets(b); // Place colors of image into buckets
             allColors.add(colors);
+            b.recycle();
+            clusters.release();
         }
         return allColors;
+    }
+    protected void onPostExecute(ArrayList<String[]> allColors){
+        ListIterator<Photo> it = photoList.listIterator();
+        int count = 0;
+        while(it.hasNext()){
+            Photo p = it.next();
+            String c = allColors.get(count)[0];
+            if(c.equals("BLACK")){
+                c = allColors.get(count)[1];
+            }
+            if(c.equals(colorToSearch)){
+                p.setColor(c);
+            }else{
+                it.remove();
+            }
+            count++;
+        }
+        Intent i = new Intent(ctx, ItemsList.class);
+        Bundle extras = new Bundle();
+        extras.putParcelableArrayList("photos", photoList);
+        i.putExtras(extras);
+        i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        ctx.startActivity(i);
     }
     public static List<Mat> cluster(Mat cutout, int k) {
         Mat samples = cutout.reshape(1, cutout.cols() * cutout.rows());
@@ -98,14 +135,14 @@ public class OpenCVHelper extends AsyncTask<CVHelperParams, Void, ArrayList<Stri
 
     private static String[] getColorBuckets(Bitmap b) {
 
-        int c1 = b.getPixel(30,30);
+        int c1 = b.getPixel(30, 30);
         int c2 = extractColors(b, c1);
 
         float[] hsv1 = new float[3];
         float[] hsv2 = new float[3];
 
         Color.colorToHSV(c1,hsv1);
-        Color.colorToHSV(c2,hsv2);
+        Color.colorToHSV(c2, hsv2);
 
         hsv1[1] = (float) 0.5;
         hsv1[2] = (float) 0.5;
