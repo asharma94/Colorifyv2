@@ -8,6 +8,9 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
+import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -54,13 +57,15 @@ public class OpenCVHelper extends AsyncTask<CVHelperParams, Void, ArrayList<Stri
         ArrayList<String[]> allColors = new ArrayList<>();
 
         for(int j = 0; j < photoList.size(); j += 1) {
-            Mat img = null;// = new Mat();
+            Mat img = new Mat();
             try {
-                Bitmap original = BitmapFactory.decodeStream(ctx.openFileInput(ctx.getResources().getString(R.string.image_path) + j));
+                //Bitmap original = BitmapFactory.decodeStream(ctx.openFileInput(ctx.getResources().getString(R.string.image_path) + j));
                 img = Imgcodecs.imread(ctx.getFilesDir().getPath() + "/myImage" + j);
                                 //img = new Mat(original.getWidth(), original.getHeight(), CvType.CV_8U);
-                Utils.bitmapToMat(original, img); // Load image
-                original.recycle();
+                /*int vvvv = original.getWidth();
+                int vv = original.getHeight();
+                Utils.bitmapToMat(original, img); // Load image*/
+               // original.recycle();
             } catch (Exception e) {
                 e.printStackTrace();
                 return null;
@@ -72,6 +77,13 @@ public class OpenCVHelper extends AsyncTask<CVHelperParams, Void, ArrayList<Stri
             Utils.matToBitmap(clusters, b); // Write to bitmap
             String[] colors = getColorBuckets(b); // Place colors of image into buckets
             allColors.add(colors);
+            /*File file = new File(android.os.Environment.DIRECTORY_DCIM, "test"+j+".png");
+            Imgcodecs.imwrite(file.getPath(),clusters);
+            try{
+                MediaStore.Images.Media.insertImage(ctx.getContentResolver(), b, "Photo" , "What a great photo");
+            }catch(Exception e){
+                Toast.makeText(ctx.getApplicationContext(), ctx.getResources().getString(R.string.image_not_saved), Toast.LENGTH_SHORT).show();
+            }*/
             b.recycle();
             clusters.release();
         }
