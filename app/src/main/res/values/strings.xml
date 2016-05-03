@@ -20,15 +20,15 @@
     <string-array name="spinner_choices">
         <item>Popular</item>
         <item>Location</item>
-        <item>Color</item>
-        <item>Tags</item>
+        <item>Color: Popular</item>
+        <item>Color: Tags</item>
     </string-array>
     <string-array name="color_choices">
         <item>Red</item>
         <item>Blue</item>
         <item>Green</item>
         <item>Purple</item>
-        <item>Orange</item>
+        <item>Cyan</item>
         <item>Yellow</item>
     </string-array>
     <string name="title_activity_search">SearchActivity</string>

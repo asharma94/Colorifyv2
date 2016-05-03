@@ -62,12 +62,13 @@ public class MainActivity extends Activity {
                         break;
                     case 3://tag
                         editText.setVisibility(View.VISIBLE);
-                        colorSpinner.setVisibility(View.INVISIBLE);
+                        colorSpinner.setVisibility(View.VISIBLE);
                         break;
                 }
             }
+
             @Override
-            public void onNothingSelected(AdapterView adapterView){
+            public void onNothingSelected(AdapterView adapterView) {
 
             }
         });
@@ -95,21 +96,15 @@ public class MainActivity extends Activity {
                         break;
                     case 3:
                         if(editText.getText().toString().matches("")){break;}
-                        InstagramTagAPIHelper tagHelper = new InstagramTagAPIHelper(activity, getApplicationContext(), editText.getText().toString().trim(), "Red");
+                        InstagramTagAPIHelper tagHelper = new InstagramTagAPIHelper(activity, getApplicationContext(), editText.getText().toString().trim(), (String)colorSpinner.getSelectedItem());
                         tagHelper.execute();
+                        Toast.makeText(getApplicationContext(), "Please Wait", Toast.LENGTH_LONG).show();
                         break;
                 }
+                editText.setText("");
             }
         });
-        Button b2 = (Button) findViewById(R.id.b2);
-        b2.setText("Login Test");
-        b2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(getApplicationContext(), LoginActivity.class);
-                startActivity(i);
-            }
-        });
+
 
     }
     public void setJSON(String[] obj, ArrayList<Photo> photoList){

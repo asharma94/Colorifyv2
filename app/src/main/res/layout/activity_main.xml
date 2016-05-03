@@ -16,13 +16,7 @@
         android:id="@+id/main_enter"
         android:layout_alignParentEnd="true"
         android:layout_below="@id/title"/>
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Check"
-        android:id="@+id/b2"
-        android:layout_alignParentEnd="true"
-        android:layout_below="@id/main_enter"/>
+
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -50,7 +44,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/main_activity_color_spinner"
-        android:layout_below="@+id/main_activity_choice_spinner"
-        android:entries="@array/color_choices"/>
+        android:layout_toEndOf="@+id/main_activity_choice_spinner"
+        android:layout_toStartOf="@+id/main_enter"
+        android:entries="@array/color_choices"
+        android:layout_below="@+id/title"/>
 
 </RelativeLayout>

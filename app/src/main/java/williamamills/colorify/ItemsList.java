@@ -40,6 +40,7 @@ public class ItemsList extends ListActivity {
         //uris = new ArrayList<>();
         setContentView(R.layout.activity_items_list);
         Bundle extras = getIntent().getExtras();
+        getActionBar().setTitle("Search Results");
         ArrayList<ClipData.Item> arrayList = new ArrayList<>();
         //Integer numImages = extras.getInt("uris");
         int cacheSize = 4 * 1024 * 1024; // 4MiB

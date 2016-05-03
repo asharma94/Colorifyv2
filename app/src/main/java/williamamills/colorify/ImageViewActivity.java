@@ -29,6 +29,7 @@ public class ImageViewActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_image_view);
         imageView = (ImageView) findViewById(R.id.image);
+        getActionBar().setTitle("");
         Bundle extras = getIntent().getExtras();
         u = extras.getInt("uri");
         photoList = extras.getParcelableArrayList("photoList");
@@ -85,7 +86,7 @@ public class ImageViewActivity extends Activity {
             @Override
             public void onClick(View v) {
                 try{
-                MediaStore.Images.Media.insertImage(getContentResolver(), BitmapFactory.decodeStream(openFileInput(getResources().getString(R.string.image_path)+u)), "Photo" , "What a great photo");
+                MediaStore.Images.Media.insertImage(getContentResolver(), BitmapFactory.decodeStream(openFileInput(photoList.get(u).getBitmapAddress())), "Photo" , "What a great photo");
                 }catch(Exception e){
                     Toast.makeText(getApplicationContext(), getResources().getString(R.string.image_not_saved), Toast.LENGTH_SHORT).show();
                 }
