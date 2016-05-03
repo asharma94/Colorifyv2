@@ -139,6 +139,7 @@ public class InstagramLocationAPIHelper extends AsyncTask<Void, Void, String> {
                     JSONObject images = test.getJSONObject("images");
                     //JSONObject thumbnail = images.getJSONObject("thumbnail");
                     //String thumbnailUrl = thumbnail.getString("url");
+                    String thumbnail = images.getJSONObject("thumbnail").getString("url");
                     String highQuality = images.getJSONObject("standard_resolution").getString("url");
 
                     String caption = "";
@@ -157,7 +158,7 @@ public class InstagramLocationAPIHelper extends AsyncTask<Void, Void, String> {
                     if(!test.isNull("likes")){
                         likes = test.getJSONObject("likes").getString("count");
                     }
-                    Photo photo = new Photo(caption, tags, likes, ctx.getResources().getString(R.string.image_path) + i, location);//location, tags, caption);
+                    Photo photo = new Photo(caption, tags, likes, ctx.getResources().getString(R.string.image_path) + i,thumbnail, location);//location, tags, caption);
                     //tester.add(thumbnailUrl);
                     tester.add(highQuality);
                     photoList.add(photo);

@@ -60,7 +60,7 @@ public class OpenCVHelper extends AsyncTask<CVHelperParams, Void, ArrayList<Stri
             Mat img = new Mat();
             try {
                 //Bitmap original = BitmapFactory.decodeStream(ctx.openFileInput(ctx.getResources().getString(R.string.image_path) + j));
-                img = Imgcodecs.imread(ctx.getFilesDir().getPath() + "/myImage" + j);
+                img = Imgcodecs.imread(ctx.getFilesDir().getPath() + "/thumbImage" + j);
                                 //img = new Mat(original.getWidth(), original.getHeight(), CvType.CV_8U);
                 /*int vvvv = original.getWidth();
                 int vv = original.getHeight();
