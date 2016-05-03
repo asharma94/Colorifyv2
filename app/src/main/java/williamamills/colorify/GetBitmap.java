@@ -62,26 +62,28 @@ public class GetBitmap extends AsyncTask<String, Void, Boolean> {
                 connection.connect();
                 InputStream input = connection.getInputStream();
                 Bitmap myBitmap = BitmapFactory.decodeStream(input); //// FIXME: 4/13/2016
-                arrayList.add(myBitmap);
+                //arrayList.add(myBitmap);
                 createImageFromBitmap(myBitmap, k);
                 k++;
                 myBitmap.recycle();
                 success = true;
             }
-            k=0;
-            for(Photo p : photoList) {
-                java.net.URL url = new java.net.URL(p.getThumbnailAddress());
-                HttpURLConnection connection = (HttpURLConnection) url
-                        .openConnection();
-                connection.setDoInput(true);
-                connection.connect();
-                InputStream input = connection.getInputStream();
-                Bitmap myBitmap = BitmapFactory.decodeStream(input); //// FIXME: 4/13/2016
-                //arrayList.add(myBitmap);
-                createThumbnailFromBitmap(myBitmap, k);
-                k++;
-                myBitmap.recycle();
-                success = true;
+            if(searchColor) {
+                k = 0;
+                for (Photo p : photoList) {
+                    java.net.URL url = new java.net.URL(p.getThumbnailAddress());
+                    HttpURLConnection connection = (HttpURLConnection) url
+                            .openConnection();
+                    connection.setDoInput(true);
+                    connection.connect();
+                    InputStream input = connection.getInputStream();
+                    Bitmap myBitmap = BitmapFactory.decodeStream(input); //// FIXME: 4/13/2016
+                    //arrayList.add(myBitmap);
+                    createThumbnailFromBitmap(myBitmap, k);
+                    k++;
+                    myBitmap.recycle();
+                    success = true;
+                }
             }
             return true;
         } catch (IOException e) {

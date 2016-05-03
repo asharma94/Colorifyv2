@@ -170,7 +170,7 @@ public class OpenCVHelper extends AsyncTask<String, Void, ArrayList<String[]>> {
         hsv2[1] = (float) 0.5;
         hsv2[2] = (float) 0.5;
 
-        String[] colors = null;
+        String[] colors = new String[2];
         int black = -16777200;
 
         if(c1 <= black || c1_white ){

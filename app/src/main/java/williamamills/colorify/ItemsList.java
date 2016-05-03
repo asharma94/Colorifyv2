@@ -53,7 +53,7 @@ public class ItemsList extends ListActivity {
             try{
                 //uris.add(BitmapFactory.decodeStream(openFileInput(getResources().getString(R.string.image_path) + k)));
                 if(k < 5)
-                    bitmapCache.put(k, (Bitmap) BitmapFactory.decodeStream(openFileInput(getResources().getString(R.string.image_path) + k)));
+                    bitmapCache.put(k, BitmapFactory.decodeStream(openFileInput(photoList.get(k).getBitmapAddress())));
             }catch(Exception e){
 
             }

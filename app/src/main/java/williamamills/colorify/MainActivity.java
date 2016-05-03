@@ -95,7 +95,7 @@ public class MainActivity extends Activity {
                         break;
                     case 3:
                         if(editText.getText().toString().matches("")){break;}
-                        InstagramTagAPIHelper tagHelper = new InstagramTagAPIHelper(activity, getApplicationContext(), editText.getText().toString().trim());
+                        InstagramTagAPIHelper tagHelper = new InstagramTagAPIHelper(activity, getApplicationContext(), editText.getText().toString().trim(), "Red");
                         tagHelper.execute();
                         break;
                 }
