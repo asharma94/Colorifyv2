@@ -36,7 +36,7 @@ import org.opencv.imgcodecs.Imgcodecs;
 import org.opencv.imgproc.Imgproc;
 
 
-public class OpenCVHelper extends AsyncTask<CVHelperParams, Void, ArrayList<String[]>> {
+public class OpenCVHelper extends AsyncTask<String, Void, ArrayList<String[]>> {
 
     Context ctx;
     ArrayList<Photo> photoList;
@@ -52,7 +52,7 @@ public class OpenCVHelper extends AsyncTask<CVHelperParams, Void, ArrayList<Stri
         colorToSearch  = _colorToSearch;
     }
 
-    protected ArrayList<String[]> doInBackground(CVHelperParams... params){
+    protected ArrayList<String[]> doInBackground(String... params){
 
         ArrayList<String[]> allColors = new ArrayList<>();
 
@@ -156,18 +156,28 @@ public class OpenCVHelper extends AsyncTask<CVHelperParams, Void, ArrayList<Stri
         Color.colorToHSV(c1,hsv1);
         Color.colorToHSV(c2, hsv2);
 
+        boolean c1_white = false;
+        boolean c2_white = false;
+
+        if(hsv1[1] < 0.1) {
+            c1_white = true;
+        }else if(hsv2[1] < 0.1) {
+            c2_white = true;
+        }
+
         hsv1[1] = (float) 0.5;
         hsv1[2] = (float) 0.5;
         hsv2[1] = (float) 0.5;
         hsv2[2] = (float) 0.5;
 
-        String[] colors = new String[2];
+        String[] colors = null;
+        int black = -16777200;
 
-        if(c1 <= -16777200){
+        if(c1 <= black || c1_white ){
             colors[0] = "BLACK";
             String s2 = getBucket(hsv2[0]);
             colors[1] = s2;
-        } else if(c2 <= -16777200){
+        } else if(c2 <= -black || c2_white){
             colors[1] = "BLACK";
             String s1 = getBucket(hsv1[0]);
             colors[0] = s1;
