@@ -238,9 +238,11 @@ public class LoginActivity extends Activity {
                 mFirebaseRef.createUser(user, pass, new Firebase.ResultHandler() {
                     @Override
                     public void onSuccess() {
-                        mFirebaseRef.authWithPassword(user, pass, new AuthResultHandler("password"));
-                        Intent i = new Intent(getApplicationContext(), MainActivity.class);
-                        startActivity(i);
+                        //mAuthProgressDialog.show();
+                        //mFirebaseRef.authWithPassword(user, pass, new AuthResultHandler("password"));
+                        loginWithPassword(user,pass);
+                        //Intent i = new Intent(getApplicationContext(), MainActivity.class);
+                        //startActivity(i);
                     }
 
                     @Override

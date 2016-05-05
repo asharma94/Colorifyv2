@@ -9,7 +9,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/title"
-        android:src="@drawable/colorify_title"/>
+        android:src="@drawable/coding_app"/>
 
 
     <ImageView
@@ -19,7 +19,7 @@
         android:layout_centerVertical="true"
         android:layout_marginBottom="80dp"
         android:id="@+id/wheel"
-        android:src="@drawable/colorwheel"/>
+        android:src="@drawable/coding_app"/>
     <EditText
         android:layout_width="180px"
         android:layout_height="10px"

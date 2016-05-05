@@ -32,15 +32,16 @@
         <item>Yellow</item>
     </string-array>
     <string name="title_activity_search">SearchActivity</string>
+    <string name="title_activity_mainview">MainViewActivity</string>
 
 
 ]    <string name="action_search">Search</string>
     <string name="drawer_open">Open</string>
     <string name="drawer_close">Close</string>
 
-    <string name="nav_item_home">Home</string>
-    <string name="nav_item_friends">Friends</string>
-    <string name="nav_item_notifications">Messages</string>
+    <string name="nav_item_home">About Us</string>
+    <string name="nav_item_friends">My Saved Pictures</string>
+    <string name="nav_item_notifications"> </string>
 
     <!-- navigation drawer item labels  -->
     <string-array name="nav_drawer_labels">
@@ -49,7 +50,7 @@
         <item>@string/nav_item_notifications</item>
     </string-array>
 
-    <string name="title_messages">Messages</string>
-    <string name="title_friends">Friends</string>
-    <string name="title_home">Home</string>
+    <string name="title_messages">Colorify Image Search</string>
+    <string name="title_friends">About Us</string>
+    <string name="title_home">Colorify Image Search</string>
 </resources>
