@@ -7,7 +7,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.text.Editable;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -23,7 +22,6 @@ import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 
 
-import java.util.Map;
 
 public class LoginActivity extends Activity {
     EditText userNameEditText;
@@ -50,7 +48,9 @@ public class LoginActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.requestWindowFeature(android.view.Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_login);
+
         MyApplication.getInstance(this);
         userNameEditText = (EditText) findViewById(R.id.login_user_name);
         passwordEditText = (EditText) findViewById(R.id.login_password);
@@ -209,12 +209,12 @@ public class LoginActivity extends Activity {
         AlertDialog.Builder alert = new AlertDialog.Builder(this);
         final EditText edittextUser = new EditText(getApplicationContext());
         edittextUser.setHint("Email");
-        edittextUser.setHintTextColor(Color.parseColor("#000000"));
+        edittextUser.setHintTextColor(Color.parseColor("#808080"));
         edittextUser.setTextColor(Color.parseColor("#000000"));
         final EditText edittextPassword = new EditText(getApplicationContext());
         edittextPassword.setHint("New Password");
         edittextPassword.setTextColor(Color.parseColor("#000000"));
-        edittextPassword.setHintTextColor(Color.parseColor("#000000"));
+        edittextPassword.setHintTextColor(Color.parseColor("#808080"));
         alert.setMessage("Create Username and Password");
         alert.setTitle("User Creation");
         LinearLayout layout = new LinearLayout(getApplicationContext());
@@ -233,11 +233,12 @@ public class LoginActivity extends Activity {
                 //What ever you want to do with the value
                 //Editable YouEditTextValue = edittext.getText();
                 //OR
-                String user = edittextUser.getText().toString().trim();
-                String pass = edittextPassword.getText().toString();
+                final String user = edittextUser.getText().toString().trim();
+                final String pass = edittextPassword.getText().toString();
                 mFirebaseRef.createUser(user, pass, new Firebase.ResultHandler() {
                     @Override
                     public void onSuccess() {
+                        mFirebaseRef.authWithPassword(user, pass, new AuthResultHandler("password"));
                         Intent i = new Intent(getApplicationContext(), MainActivity.class);
                         startActivity(i);
                     }
@@ -255,7 +256,6 @@ public class LoginActivity extends Activity {
                 // what ever you want to do with No option.
             }
         });
-
         alert.show();
     }
 

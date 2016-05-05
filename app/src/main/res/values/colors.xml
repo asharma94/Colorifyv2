@@ -11,7 +11,12 @@
     <color name="darkgreen" type="color">#FF669900</color>
     <color name="darkorange" type="color">#FFFF8800</color>
     <color name="darkred" type="color">#FFCC0000</color>
-
+    <color name="colorPrimary">#F50057</color>
+    <color name="colorPrimaryDark">#C51162</color>
+    <color name="textColorPrimary">#FFFFFF</color>
+    <color name="windowBackground">#FFFFFF</color>
+    <color name="navigationBarColor">#000000</color>
+    <color name="colorAccent">#FF80AB</color>
     <integer-array name="androidcolors">
         <item>@color/blue</item>
         <item>@color/purple</item>
@@ -24,8 +29,6 @@
         <item>@color/darkorange</item>
         <item>@color/darkred</item>
     </integer-array>
-    <color name="colorPrimary">@color/red</color>
-    <color name="colorPrimaryDark">@color/darkpurple</color>
-    <color name="colorAccent">@color/blue</color>
+
 
 </resources>

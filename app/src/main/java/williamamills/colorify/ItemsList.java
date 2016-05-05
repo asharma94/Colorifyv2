@@ -9,6 +9,7 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Parcelable;
 import android.util.LruCache;
 import android.view.LayoutInflater;
@@ -19,6 +20,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -34,13 +36,16 @@ public class ItemsList extends ListActivity {
     LruCache<Integer, Bitmap> bitmapCache;
     ItemsList itemsList;
     ArrayList<Photo> photoList = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //this.requestWindowFeature(android.view.Window.FEATURE_NO_TITLE);
         //uris = new ArrayList<>();
         setContentView(R.layout.activity_items_list);
+
         Bundle extras = getIntent().getExtras();
-        getActionBar().setTitle("Search Results");
+        //getActionBar().setTitle("Search Results");
         ArrayList<ClipData.Item> arrayList = new ArrayList<>();
         //Integer numImages = extras.getInt("uris");
         int cacheSize = 4 * 1024 * 1024; // 4MiB

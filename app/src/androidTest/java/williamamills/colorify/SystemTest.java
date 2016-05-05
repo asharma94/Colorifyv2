@@ -98,8 +98,8 @@ public class SystemTest {
         onView(withId(R.id.main_activity_choice_spinner))
                 .perform(click());
         onData(allOf(is(instanceOf(String.class)), is("Color"))).perform(click());
-        onView(withId(R.id.main_activity_color_spinner))
-                .perform(click());
+       // onView(withId(R.id.main_activity_color_spinner))
+         //       .perform(click());
         onData(allOf(is(instanceOf(String.class)), is("Blue"))).perform(click());
         onView(withId(R.id.main_enter)).perform(click());
         // Check that the text was changed.
