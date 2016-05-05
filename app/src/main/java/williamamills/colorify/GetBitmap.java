@@ -62,11 +62,28 @@ public class GetBitmap extends AsyncTask<String, Void, Boolean> {
                 connection.connect();
                 InputStream input = connection.getInputStream();
                 Bitmap myBitmap = BitmapFactory.decodeStream(input); //// FIXME: 4/13/2016
-                arrayList.add(myBitmap);
+                //arrayList.add(myBitmap);
                 createImageFromBitmap(myBitmap, k);
                 k++;
                 myBitmap.recycle();
                 success = true;
+            }
+            if(searchColor) {
+                k = 0;
+                for (Photo p : photoList) {
+                    java.net.URL url = new java.net.URL(p.getThumbnailAddress());
+                    HttpURLConnection connection = (HttpURLConnection) url
+                            .openConnection();
+                    connection.setDoInput(true);
+                    connection.connect();
+                    InputStream input = connection.getInputStream();
+                    Bitmap myBitmap = BitmapFactory.decodeStream(input); //// FIXME: 4/13/2016
+                    //arrayList.add(myBitmap);
+                    createThumbnailFromBitmap(myBitmap, k);
+                    k++;
+                    myBitmap.recycle();
+                    success = true;
+                }
             }
             return true;
         } catch (IOException e) {
@@ -82,6 +99,7 @@ public class GetBitmap extends AsyncTask<String, Void, Boolean> {
     protected void onPostExecute(Boolean response) {
         /* what do with the network call response,
          * potentially to store into sql db */
+        if(response == null) response = true;
         if(!response) {
             Toast.makeText(ctx, "THERE WAS AN ERROR RETRIEVING JSON DATA", Toast.LENGTH_LONG).show();
             System.out.println("THERE WAS AN ERROR RETRIEVING JSON DATA");
@@ -104,6 +122,21 @@ public class GetBitmap extends AsyncTask<String, Void, Boolean> {
     }
     public String createImageFromBitmap(Bitmap bitmap, int i) {
         String fileName = "myImage" + i;//no .png or .jpg needed
+        try {
+            ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+            FileOutputStream fo = ctx.openFileOutput(fileName, Context.MODE_PRIVATE);
+            fo.write(bytes.toByteArray());
+            // remember close file output
+            fo.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+            fileName = null;
+        }
+        return fileName;
+    }
+    public String createThumbnailFromBitmap(Bitmap bitmap, int i) {
+        String fileName = "thumbImage" + i;//no .png or .jpg needed
         try {
             ByteArrayOutputStream bytes = new ByteArrayOutputStream();
             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bytes);

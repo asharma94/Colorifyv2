@@ -97,10 +97,10 @@ public class InstagramColorAPIHelper extends AsyncTask<Void, Void, ArrayList<Str
                     for (int i = 0; i < data.length(); i++) {
                         JSONObject test = data.getJSONObject(i); //photo at index 1
                         JSONObject images = test.getJSONObject("images");
-                        JSONObject thumbnail = images.getJSONObject("thumbnail");
-                        String thumbnailUrl = thumbnail.getString("url");
+                        //JSONObject thumbnail = images.getJSONObject("thumbnail");
+                        //String thumbnailUrl = thumbnail.getString("url");
                         String highQuality = images.getJSONObject("standard_resolution").getString("url");
-
+                        String thumbnail = images.getJSONObject("thumbnail").getString("url");
                         String caption = "";
                         if (!test.isNull("caption")) {
                             caption = test.getJSONObject("caption").getString("text");
@@ -117,9 +117,9 @@ public class InstagramColorAPIHelper extends AsyncTask<Void, Void, ArrayList<Str
                         if (!test.isNull("likes")) {
                             likes = test.getJSONObject("likes").getString("count");
                         }
-                        Photo photo = new Photo(caption, tags, likes, ctx.getResources().getString(R.string.image_path) + photoList.size(), location);//location, tags, caption);
+                        Photo photo = new Photo(caption, tags, likes, ctx.getResources().getString(R.string.image_path) + photoList.size(),thumbnail, location);//location, tags, caption);
                         //tester.add(thumbnailUrl);
-                        tester.add(thumbnailUrl);
+                        tester.add(highQuality);
                         photoList.add(photo);
                     }
 

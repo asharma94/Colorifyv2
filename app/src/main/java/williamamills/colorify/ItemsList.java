@@ -40,6 +40,7 @@ public class ItemsList extends ListActivity {
         //uris = new ArrayList<>();
         setContentView(R.layout.activity_items_list);
         Bundle extras = getIntent().getExtras();
+        getActionBar().setTitle("Search Results");
         ArrayList<ClipData.Item> arrayList = new ArrayList<>();
         //Integer numImages = extras.getInt("uris");
         int cacheSize = 4 * 1024 * 1024; // 4MiB
@@ -53,7 +54,7 @@ public class ItemsList extends ListActivity {
             try{
                 //uris.add(BitmapFactory.decodeStream(openFileInput(getResources().getString(R.string.image_path) + k)));
                 if(k < 5)
-                    bitmapCache.put(k, (Bitmap) BitmapFactory.decodeStream(openFileInput(getResources().getString(R.string.image_path) + k)));
+                    bitmapCache.put(k, BitmapFactory.decodeStream(openFileInput(photoList.get(k).getBitmapAddress())));
             }catch(Exception e){
 
             }
