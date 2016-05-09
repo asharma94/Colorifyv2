@@ -65,6 +65,12 @@
             android:text="@string/login"
             android:id="@+id/main_enter"
             android:layout_gravity="bottom"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/color_button"
+            android:text="Select Color"
+            android:visibility="invisible" />
 
         <Spinner
             android:layout_width="wrap_content"
@@ -74,6 +80,7 @@
             android:entries="@array/spinner_choices"
             android:layout_below="@+id/main_enter"
             android:id="@+id/main_activity_choice_spinner"/>
+
     </LinearLayout>
 
 

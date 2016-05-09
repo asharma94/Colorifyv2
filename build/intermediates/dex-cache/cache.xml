@@ -1,2 +1,124 @@
 <?xml version="1.0" encoding="utf-8"?>
-<items version="2" />
+<items version="2" >
+
+    <item
+        jar="/Users/Rafi/AndroidStudioProjects/Colorifyv2/app/build/intermediates/exploded-aar/com.thebluealliance/spectrum/0.4.2/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="4b2b46c459a9eadd5c5e31013a98a85a97adf566">
+        <dex dex="/Users/Rafi/AndroidStudioProjects/Colorifyv2/app/build/intermediates/pre-dexed/release/com.thebluealliance-spectrum-0.4.2_27bce4d7956f2a2a6e306834dfe62ec92b4495ad.jar" />
+    </item>
+    <item
+        jar="/Users/Rafi/AndroidStudioProjects/Colorifyv2/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.3.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="8a034dd16c0dfd75fe86c52c2cd581592acc684a">
+        <dex dex="/Users/Rafi/AndroidStudioProjects/Colorifyv2/app/build/intermediates/pre-dexed/release/com.android.support-support-v4-23.3.0_5eca5470914efa4392b7ef401575b8570f44cec4.jar" />
+    </item>
+    <item
+        jar="/Users/Rafi/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.core/jackson-annotations/2.2.2/285cb9c666f0f0f3dd8a1be04e1f457eb7b15113/jackson-annotations-2.2.2.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="285cb9c666f0f0f3dd8a1be04e1f457eb7b15113">
+        <dex dex="/Users/Rafi/AndroidStudioProjects/Colorifyv2/app/build/intermediates/pre-dexed/release/jackson-annotations-2.2.2_a17916f34580c4e5f47a09557e35b293f651bee9.jar" />
+    </item>
+    <item
+        jar="/Users/Rafi/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/23.3.0/support-annotations-23.3.0.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="db7791d75a07fef9844d06236c1c59ba7bf6997c">
+        <dex dex="/Users/Rafi/AndroidStudioProjects/Colorifyv2/app/build/intermediates/pre-dexed/release/support-annotations-23.3.0_5354ba2c9f0d2141da494b05ade1259b019aeaf9.jar" />
+    </item>
+    <item
+        jar="/Users/Rafi/AndroidStudioProjects/Colorifyv2/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.3.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="1b8e03daaa43fb0a4cd57e378167c2fd70454c1e">
+        <dex dex="/Users/Rafi/AndroidStudioProjects/Colorifyv2/app/build/intermediates/pre-dexed/release/com.android.support-appcompat-v7-23.3.0_232bdae5dd48399abab913ce537296c911b4bce8.jar" />
+    </item>
+    <item
+        jar="/Users/Rafi/AndroidStudioProjects/Colorifyv2/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/23.3.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="debf30ce0a7560396b6235edef77e447006454c2">
+        <dex dex="/Users/Rafi/AndroidStudioProjects/Colorifyv2/app/build/intermediates/pre-dexed/release/com.android.support-recyclerview-v7-23.3.0_db730942b2d4930609f9d29532fe22d02c510454.jar" />
+    </item>
+    <item
+        jar="/Users/Rafi/.gradle/caches/modules-2/files-2.1/com.firebase/firebase-client-android/2.5.0/7d0473896b3b10b23a2f9812fec4316dff8afdd/firebase-client-android-2.5.0.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="07d0473896b3b10b23a2f9812fec4316dff8afdd">
+        <dex dex="/Users/Rafi/AndroidStudioProjects/Colorifyv2/app/build/intermediates/pre-dexed/release/firebase-client-android-2.5.0_a7cb4b316167aa0ed455339355b914b8f36e0027.jar" />
+    </item>
+    <item
+        jar="/Users/Rafi/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.core/jackson-databind/2.2.2/3c8f6018eaa72d43b261181e801e6f8676c16ef6/jackson-databind-2.2.2.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="3c8f6018eaa72d43b261181e801e6f8676c16ef6">
+        <dex dex="/Users/Rafi/AndroidStudioProjects/Colorifyv2/app/build/intermediates/pre-dexed/release/jackson-databind-2.2.2_3b69cce5877baba399283b584f7147f061e6171f.jar" />
+    </item>
+    <item
+        jar="/Users/Rafi/.gradle/caches/modules-2/files-2.1/org.greenrobot/eventbus/3.0.0/ddd99896e9569eaababbe81b35d80e1b91c4ad85/eventbus-3.0.0.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="ddd99896e9569eaababbe81b35d80e1b91c4ad85">
+        <dex dex="/Users/Rafi/AndroidStudioProjects/Colorifyv2/app/build/intermediates/pre-dexed/release/eventbus-3.0.0_d3448df4fa6c1eea125d3fc13eead83b85e73a18.jar" />
+    </item>
+    <item
+        jar="/Users/Rafi/.gradle/caches/modules-2/files-2.1/com.fasterxml.jackson.core/jackson-core/2.2.2/d20be6a5ddd6f8cfd36ebf6dea329873a1c41f1b/jackson-core-2.2.2.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="d20be6a5ddd6f8cfd36ebf6dea329873a1c41f1b">
+        <dex dex="/Users/Rafi/AndroidStudioProjects/Colorifyv2/app/build/intermediates/pre-dexed/release/jackson-core-2.2.2_4f6b72009e31e8f2ae4721799c1c464a99fd8e93.jar" />
+    </item>
+    <item
+        jar="/Users/Rafi/AndroidStudioProjects/Colorifyv2/app/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/23.3.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="23be6993826b8fd88bbc8d14928bb3b8960d3d4e">
+        <dex dex="/Users/Rafi/AndroidStudioProjects/Colorifyv2/app/build/intermediates/pre-dexed/release/com.android.support-animated-vector-drawable-23.3.0_3ef74266a7ebd7dc0dcdd3b136c2be82e625f419.jar" />
+    </item>
+    <item
+        jar="/Users/Rafi/.gradle/caches/modules-2/files-2.1/com.firebase/firebase-client-jvm/2.5.0/c0af904657634f7ab9cc21e75d80250570033321/firebase-client-jvm-2.5.0.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="c0af904657634f7ab9cc21e75d80250570033321">
+        <dex dex="/Users/Rafi/AndroidStudioProjects/Colorifyv2/app/build/intermediates/pre-dexed/release/firebase-client-jvm-2.5.0_59f21317de22edeb3562bbc792348440bb509362.jar" />
+    </item>
+    <item
+        jar="/Users/Rafi/AndroidStudioProjects/Colorifyv2/app/build/intermediates/exploded-aar/com.android.support/preference-v7/23.3.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="0ba60f3bba23144a2f54a77ae29d6375c5eaec10">
+        <dex dex="/Users/Rafi/AndroidStudioProjects/Colorifyv2/app/build/intermediates/pre-dexed/release/com.android.support-preference-v7-23.3.0_5c3026e20c4b8a4dfab6c43f11dee317b0fae066.jar" />
+    </item>
+    <item
+        jar="/Users/Rafi/AndroidStudioProjects/Colorifyv2/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.3.0/jars/libs/internal_impl-23.3.0.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="4da5a4d697d32497c6f85567a5112e62fdfd0676">
+        <dex dex="/Users/Rafi/AndroidStudioProjects/Colorifyv2/app/build/intermediates/pre-dexed/release/internal_impl-23.3.0_55c044e6a89c79bb93c5a821d549a0f3cd41cd7a.jar" />
+    </item>
+    <item
+        jar="/Users/Rafi/.gradle/caches/modules-2/files-2.1/com.firebase/tubesock/0.0.12/6ec0bbd3e161a73ed672284b587fd32309a86d7a/tubesock-0.0.12.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="6ec0bbd3e161a73ed672284b587fd32309a86d7a">
+        <dex dex="/Users/Rafi/AndroidStudioProjects/Colorifyv2/app/build/intermediates/pre-dexed/release/tubesock-0.0.12_f9b06343b874e40a9de1b54a1a2e100bda42c417.jar" />
+    </item>
+    <item
+        jar="/Users/Rafi/AndroidStudioProjects/Colorifyv2/app/build/intermediates/exploded-aar/Colorifyv2/opencv-java/unspecified/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="6d6ca23cb1299564b7ecbd1d13bd16a46792b95b">
+        <dex dex="/Users/Rafi/AndroidStudioProjects/Colorifyv2/app/build/intermediates/pre-dexed/release/Colorifyv2-opencv-java-unspecified_b774198732e49e5cda525f4c0994148f22102343.jar" />
+    </item>
+    <item
+        jar="/Users/Rafi/AndroidStudioProjects/Colorifyv2/app/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/23.3.0/jars/classes.jar"
+        jumboMode="false"
+        revision="23.0.1"
+        sha1="a0b5d60246cd9d4f3f2443611b3b4c25265840b5">
+        <dex dex="/Users/Rafi/AndroidStudioProjects/Colorifyv2/app/build/intermediates/pre-dexed/release/com.android.support-support-vector-drawable-23.3.0_a76e21bf560a78e396e395a301c0298c81cbf31d.jar" />
+    </item>
+
+</items>

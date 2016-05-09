@@ -3,11 +3,8 @@ package williamamills.colorify;
 import android.app.Activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.media.Image;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
-import android.os.Parcelable;
 import android.provider.MediaStore;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -15,10 +12,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
-
+import java.io.FileOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class ImageViewActivity extends Activity {
     ImageView imageView;
@@ -90,7 +88,8 @@ public class ImageViewActivity extends Activity {
             @Override
             public void onClick(View v) {
                 try{
-                MediaStore.Images.Media.insertImage(getContentResolver(), BitmapFactory.decodeStream(openFileInput(photoList.get(u).getBitmapAddress())), "Photo" , "What a great photo");
+                    saveFile(BitmapFactory.decodeStream(openFileInput(photoList.get(u).getBitmapAddress())));
+                    MediaStore.Images.Media.insertImage(getContentResolver(), BitmapFactory.decodeStream(openFileInput(photoList.get(u).getBitmapAddress())), "Photo" , "What a great photo");
                 }catch(Exception e){
                     Toast.makeText(getApplicationContext(), getResources().getString(R.string.image_not_saved), Toast.LENGTH_SHORT).show();
                 }
@@ -98,7 +97,27 @@ public class ImageViewActivity extends Activity {
         });
 
     }
-
+    private void saveFile(Bitmap imageToSave) {
+        Random generator = new Random();
+        int n = 10000;
+        n = generator.nextInt(n);
+        String fileName = "colorifyimage-" + n + ".jpg";
+        File file = new File(new File("/sdcard/ColorifySavedPictures/"), fileName);
+        if(file.exists()){
+            n = 10000;
+            n = generator.nextInt();
+            fileName = "colorifyimage-" + n + ".jpg";
+            file = new File(new File("/sdcard/ColorifySavedPictures/"), fileName);
+        }
+        try {
+            FileOutputStream out = new FileOutputStream(file);
+            imageToSave.compress(Bitmap.CompressFormat.JPEG, 100, out);
+            out.flush();
+            out.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.

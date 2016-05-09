@@ -13,7 +13,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Colorify is an Android app that can search for images by color. Use the drop down box below to select your search mode, then hit search to find pictures. Made by Alexander, Ankit, Nishant, and Rafi"
+        android:text="Colorify is an Android app that can search for images on Instagram by color. Use the drop down box below to select your search mode, then hit search to find pictures. Made by Alexander, Ankit, Nishant, and Rafi"
         android:textColor="@android:color/holo_blue_dark"
         android:textSize="18dp"
         android:textColorHighlight="@android:color/primary_text_dark"

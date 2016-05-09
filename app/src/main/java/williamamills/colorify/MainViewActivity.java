@@ -123,12 +123,11 @@ public class MainViewActivity extends AppCompatActivity implements FragmentDrawe
         GridView gridview = (GridView) findViewById(R.id.gridview);
         myImageAdapter = new ImageAdapter(this);
         gridview.setAdapter(myImageAdapter);
-
         String ExternalStorageDirectoryPath = Environment
                 .getExternalStorageDirectory()
                 .getAbsolutePath();
 
-        String targetPath = ExternalStorageDirectoryPath + "/Pictures/";
+        String targetPath = ExternalStorageDirectoryPath + "/ColorifySavedPictures/";
 
         //Toast.makeText(getApplicationContext(), targetPath, Toast.LENGTH_LONG).show();
         File targetDirector = new File(targetPath);
